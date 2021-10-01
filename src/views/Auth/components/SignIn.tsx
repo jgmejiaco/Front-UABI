@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import * as actions from './../../store/actions/userAction';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import {
 	Form,
 	Image,
@@ -12,8 +12,9 @@ import {
 	Grid,
 } from 'semantic-ui-react';
 
-import loginimage from './../../../utils/assets/img/login.png';
+import loginimage from './../../../utils/assets/img/login.jpeg';
 import logo from './../../../utils/assets/img/escudoAlcaldia.png';
+import { signIn } from './../../../apis/authentification';
 
 export default function SignIn() {
 	const history = useHistory();
@@ -24,16 +25,19 @@ export default function SignIn() {
 
 	async function ingresarUsuario() {
 		try {
-			let token = await axios.post(
-				`${process.env.REACT_APP_PAGE_HOST}api/autenticacion`,
-				{
-					idusuario,
-					contraseña,
-				}
+			let token: AxiosResponse<any> | string = await signIn(
+				idusuario,
+				contraseña
 			);
-			console.log('ingreso el usuario');
+			if (typeof token === 'string') {
+				alert('Any error');
+				return;
+			}
+			console.log(token);
+
 			localStorage.setItem('token', token.data);
 			history.push('/');
+			window.location.reload();
 		} catch (error) {
 			console.error(error);
 		}
@@ -48,6 +52,7 @@ export default function SignIn() {
 			setContenidopassword('VER');
 		}
 	}
+
 	return (
 		<div>
 			<Grid columns={2} style={{ height: '100vh' }} className='no-margin'>
@@ -62,7 +67,7 @@ export default function SignIn() {
 							</Form.Field>
 							<Form.Field>
 								<Header as='h2' className='sub-header-login'>
-									UABI: Unidad Administrativa de Bienes Inmuebles
+									Unidad Administración de Bienes Inmuebles - UABI -
 									<Header.Subheader className='sub-header-login'>
 										Inicie sesion o registrese para acceder al sistema
 									</Header.Subheader>
@@ -118,7 +123,9 @@ export default function SignIn() {
 								<Button
 									color='black'
 									className='boton-ingresar-login'
-									onClick={() => history.push('/CrearUsuario')}
+									onClick={() =>
+										(window.location.href = 'http://localhost:3000/auth/signup')
+									}
 								>
 									Registrarme
 								</Button>
