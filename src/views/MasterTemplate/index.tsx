@@ -9,6 +9,7 @@ import {
 import Registros from './pages/Registros';
 import SideBar from '../../utils/components/SideBar';
 import TopBar from './../../utils/components/TopBar/index';
+import Location from '../../utils/components/location/location';
 import Home from './pages/Home';
 
 function MasterTemplate() {
@@ -20,6 +21,7 @@ function MasterTemplate() {
 			<div className='content w-100'>
 				<TopBar />
 				<Home />
+				<Location />
 
 				{/* <Router>
 					<Switch>
