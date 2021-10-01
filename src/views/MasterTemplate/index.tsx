@@ -9,7 +9,7 @@ import {
 import Registros from './pages/Registros';
 import SideBar from '../../utils/components/SideBar';
 import TopBar from './../../utils/components/TopBar/index';
-import Location from '../../utils/components/location/location';
+import Location from '../../utils/components/Location';
 import Home from './pages/Home';
 import { PrivateRoute } from '../../utils/components/PrivateRoute';
 import { useEffect, useState, Component } from 'react';
@@ -43,8 +43,8 @@ function MasterTemplate() {
 						<PrivateRoute path='/' isAuthenticated={isAuthenticated} exact>
 							<Home />
 						</PrivateRoute>
-            <PrivateRoute path='/location' isAuthenticated={isAuthenticated}>
-              <Location />
+						<PrivateRoute path='/location' isAuthenticated={isAuthenticated}>
+							<Location />
 						</PrivateRoute>
 						<PrivateRoute path='/registros' isAuthenticated={isAuthenticated}>
 							<Registros />

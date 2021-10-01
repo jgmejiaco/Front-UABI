@@ -10,6 +10,7 @@ export const getProjects = async (): Promise<IProjectsResponse | string> => {
 	try {
 		let URI = `${URI_SERVICE_UABI}projects/lists`;
 		let res: AxiosResponse<IProjectsResponse> = await axios.get(URI);
+		console.log(res);
 
 		return res.data;
 	} catch (error) {
