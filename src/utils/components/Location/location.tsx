@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 
 const Location = () => {
-	//	Crear el State
+	/*INICIO | STATES*/
+
+	//	Crear el State de captura de datos
 	const [locationName, setLocationName] = useState({
 		pais: '',
 		departamento: '',
@@ -18,16 +20,48 @@ const Location = () => {
 		indicativo: '',
 		indicaciones: ''
 	});
+	/*====================================================*/
 
-	//	Función que detecta los cambios de cada select e input del formulario
+	//	State de Errores
+	const [error, setError] = useState(false);
+
+	//	Resumen de la Consulta
+	// const [consulta, setConsulta] = useState( {  } );
+
+
+	/*FIN | STATES*/
+
+	/*================================================*/
+	/*================================================*/
+
+	/* INICIO FUNCIONES QUE MODIFICAN LOS STATE's */
+
+	//	Función que detecta los cambios de cada select e input del formulario y actualiza el State
 	const handleChange = (e: any) => {
 		console.log(e.target.name);
 		console.log(e.target.value);
+
 		setLocationName({
 			...locationName,
 			[e.target.name]: e.target.value
 		});
 	};
+
+	/*=======================================================*/
+
+	//	Función que recopila la consulta
+	// const resumenConsulta = (e: any) => {
+
+	// 	setConsulta({
+	// 		...consulta,
+	// 		// [e.target.name]: e.target.value
+	// 	});
+	// };
+
+	// console.log(resumenConsulta);
+
+	/*=======================================================*/
+	/*=======================================================*/
 
 	//	Extraigo los valores del objeto con "destructuring"
 	const {	pais, departamento, municipio, comuna, barrio, via, numero1, letra1, orientacion1, numero2, letra2, orientacion2, indicativo, indicaciones} = locationName;
@@ -38,13 +72,51 @@ const Location = () => {
 	const handleSubmit = (e: FormElement) => {
 		e.preventDefault();
 		console.log('Enviando datos del formulario....................');
-		alert('Enviando datos del formulario....................');
+		// alert('Enviando datos del formulario....................');
+
+		//	VALIDAR CAMPOS
+		if(pais.trim() === '' || departamento.trim() === '' || municipio.trim() === '' || comuna.trim() === '' || barrio.trim() === '' || numero1.trim() === '' || numero2.trim() === '' || indicativo.trim() === '') {
+			// alert(`Los Campos país, departamento, municipio, comuna, barrio, Tipo, número, indicativo, no pueden ir vacios`);
+			setError(true);
+			return;
+		}
+
+		//	ELIMINAR EL MENSAJE PREVIO DE ERROR CUANDO NO HA PASADO LA VALIDACIÓN DE CAMPOS, CUANDO PASA, LO ELIMINAMOS
+		setError(false);
+
+		//	ASIGNAR ID (crear el Key) ¿NECESARIO?
+
+		//	CREAR LA CONSULTA
+		
+
+		//	REINICIAR EL FORM PARA DEJARLO EN CAMPOS VACIOS
+		setLocationName({
+			pais: '',
+			departamento: '',
+			municipio: '',
+			comuna: '',
+			barrio: '',
+			via: '',
+			numero1: '',
+			letra1: '',
+			orientacion1: '',
+			numero2: '',
+			letra2: '',
+			orientacion2: '',
+			indicativo: '',
+			indicaciones: ''
+		});
+
 	}
+
+	/*=======================================================*/
+	/*=======================================================*/
 
 	return (
 		<section className='mainContainerLocation'>
 			<form
 				className='containerLocation'
+				method="POST"
 				onSubmit={handleSubmit}	
 			>
 				<div className="pt-3">
@@ -52,16 +124,19 @@ const Location = () => {
 					<hr />
 				</div>
 
+				{ error ? <p className="alert alert-danger text-center" role="alert">Los Campos país, departamento, municipio, comuna, barrio, Tipo, número, indicativo, son obligatorios</p> : null}
+
 				<div className="innerContainerLocation">
 					<div className='d-md-flex justify-content-between'>
 						<div className='col-md-2'>
-							<label htmlFor='country' className="form-label">País</label>
+							<label htmlFor='country' className="form-label">País <span style={ { color: 'red', fontWeight: 'bolder' } }>*</span></label>
 							<select
 								id='country'
 								className='w-100 form-select'
 								name="pais"
 								onChange={handleChange}
 								value={pais}
+								// required
 								// onChange={e => setLocationName(e.target.value)}
 							>
 								<option value='' selected disabled>
@@ -77,13 +152,14 @@ const Location = () => {
 						</div>
 
 						<div className='col-md-2 mt-4 mt-md-0'>
-							<label htmlFor='state' className="form-label">Departamento</label>
+							<label htmlFor='state' className="form-label">Departamento <span style={ { color: 'red', fontWeight: 'bolder' } }>*</span></label>
 							<select
 								id='state'
 								className='w-100 form-select'
 								name="departamento"
 								onChange={handleChange}
 								value={departamento}
+								// required
 							>
 								<option value='' selected disabled>
 									--Departamento--
@@ -98,13 +174,14 @@ const Location = () => {
 						</div>
 
 						<div className='col-md-2 mt-4 mt-md-0'>
-							<label htmlFor='city' className="form-label">Municipio</label>
+							<label htmlFor='city' className="form-label">Municipio <span style={ { color: 'red', fontWeight: 'bolder' } }>*</span></label>
 							<select
 								id='city'
 								className='w-100 form-select'
 								name='municipio'
 								onChange={handleChange}
 								value={municipio}
+								// required
 							>
 								<option value='' selected disabled>
 									--Municipio--
@@ -121,13 +198,14 @@ const Location = () => {
 						</div>
 
 						<div className='col-md-2 mt-4 mt-md-0'>
-							<label htmlFor='comuna' className="form-label">Comuna</label>
+							<label htmlFor='comuna' className="form-label">Comuna <span style={ { color: 'red', fontWeight: 'bolder' } }>*</span></label>
 							<select
 								id='comuna'
 								className='w-100 form-select'
 								name='comuna'
 								onChange={handleChange}
 								value={comuna}
+								// required
 							>
 								<option value='' selected disabled>
 									--Comuna--
@@ -152,13 +230,14 @@ const Location = () => {
 						</div>
 
 						<div className='col-md-2 mt-4 mt-md-0'>
-							<label htmlFor='barrio' className="form-label">Barrio</label>
+							<label htmlFor='barrio' className="form-label">Barrio <span style={ { color: 'red', fontWeight: 'bolder' } }>*</span></label>
 							<select
 								id='barrio'
 								className='w-100 form-select'
 								name='barrio'
 								onChange={handleChange}
 								value={barrio}
+								// required
 							>
 								<option value='' selected disabled>
 									--Barrio--
@@ -183,24 +262,25 @@ const Location = () => {
 
 						<div className='d-md-flex justify-content-between mt-1'>
 							<div className='col-md-2 mt-4 mt-md-0 pe-sm-0'>
-								<label htmlFor='type1' className="form-label">Tipo</label>
+								<label htmlFor='type1' className="form-label">Tipo <span style={ { color: 'red', fontWeight: 'bolder' } }>*</span></label>
 								<select
 									id='type1'
 									className='w-100 form-select'
 									name='via'
 									onChange={handleChange}
 									value={via}
+									// required
 								>
 									<option value='' selected disabled>
 										--Tipo--
 									</option>
-									<option key="calle"  value='Calle'>Calle</option>
-									<option key="carrera"  value='Carrera'>Carrera</option>
-									<option key="avenida"  value='Avenida'>Avenida</option>
-									<option key="circular"  value='Circular'>Circular</option>
-									<option key="transversal"  value='Transversal'>Transversal</option>
-									<option key="circunvalar"  value='Circunvalar'>Circunvalar</option>
-									<option key="diagonal"  value='Diagonal'>Diagonal</option>
+									<option key="calle" value='Calle'>Calle</option>
+									<option key="carrera" value='Carrera'>Carrera</option>
+									<option key="avenida" value='Avenida'>Avenida</option>
+									<option key="circular" value='Circular'>Circular</option>
+									<option key="transversal" value='Transversal'>Transversal</option>
+									<option key="circunvalar" value='Circunvalar'>Circunvalar</option>
+									<option key="diagonal" value='Diagonal'>Diagonal</option>
 								</select>
 							</div>
 
@@ -211,7 +291,7 @@ const Location = () => {
 							</div> */}
 
 							<div className='col-md-2 mt-4 mt-md-0 pe-sm-0'>
-								<label htmlFor='number1' className="form-label">Número</label>
+								<label htmlFor='number1' className="form-label">Número <span style={ { color: 'red', fontWeight: 'bolder' } }>*</span></label>
 								<input
 									type='number'
 									name='numero1'
@@ -219,6 +299,7 @@ const Location = () => {
 									className="form-control"
 									onChange={handleChange}
 									value={numero1}
+									// required
 								/>
 							</div>
 
@@ -234,27 +315,27 @@ const Location = () => {
 									<option value='' selected disabled>
 										--Letra--
 									</option>
-									<option value='A'>A</option>
-									<option value='B'>B</option>
-									<option value='B'>C</option>
-									<option value='D'>D</option>
-									<option value='E'>E</option>
-									<option value='F'>F</option>
-									<option value='G'>G</option>
-									<option value='H'>H</option>
-									<option value='I'>I</option>
-									<option value='AA'>AA</option>
-									<option value='AB'>AB</option>
-									<option value='AC'>AC</option>
-									<option value='AD'>AD</option>
-									<option value='AE'>AE</option>
-									<option value='BB'>BB</option>
-									<option value='BC'>BC</option>
-									<option value='CC'>CC</option>
-									<option value='CD'>CD</option>
-									<option value='CE'>CE</option>
-									<option value='DD'>DD</option>
-									<option value='DE'>DE</option>
+									<option key="A" value='A'>A</option>
+									<option key="B" value='B'>B</option>
+									<option key="C" value='B'>C</option>
+									<option key="D" value='D'>D</option>
+									<option key="E" value='E'>E</option>
+									<option key="F" value='F'>F</option>
+									<option key="G" value='G'>G</option>
+									<option key="H" value='H'>H</option>
+									<option key="I" value='I'>I</option>
+									<option key="AA" value='AA'>AA</option>
+									<option key="AB" value='AB'>AB</option>
+									<option key="AC" value='AC'>AC</option>
+									<option key="AD" value='AD'>AD</option>
+									<option key="AE" value='AE'>AE</option>
+									<option key="BB" value='BB'>BB</option>
+									<option key="BC" value='BC'>BC</option>
+									<option key="CC" value='CC'>CC</option>
+									<option key="CD" value='CD'>CD</option>
+									<option key="CE" value='CE'>CE</option>
+									<option key="DD" value='DD'>DD</option>
+									<option key="DE" value='DE'>DE</option>
 								</select>
 							</div>
 
@@ -270,10 +351,10 @@ const Location = () => {
 									<option value='' selected disabled>
 										--Orientación--
 									</option>
-									<option value='Sur'>Sur</option>
-									<option value='Norte'>Norte</option>
-									<option value='Oeste'>Oeste</option>
-									<option value='Este'>Este</option>
+									<option key="sur" value='Sur'>Sur</option>
+									<option key="norte" value='Norte'>Norte</option>
+									<option key="oeste" value='Oeste'>Oeste</option>
+									<option key="este" value='Este'>Este</option>
 								</select>
 							</div>
 						</div>
@@ -302,7 +383,7 @@ const Location = () => {
 							</div>
 
 							<div className='col-md-2 mt-4 mt-md-0'>
-								<label htmlFor='number2' className="form-label">Número</label>
+								<label htmlFor='number2' className="form-label">Número <span style={ { color: 'red', fontWeight: 'bolder' } }>*</span></label>
 								<input
 									type='number'
 									name='numero2'
@@ -310,6 +391,7 @@ const Location = () => {
 									className="form-control"
 									onChange={handleChange}
 									value={numero2}
+									// required
 								/>
 							</div>
 
@@ -325,27 +407,27 @@ const Location = () => {
 									<option value='' selected disabled>
 										--Letra--
 									</option>
-									<option value='A'>A</option>
-									<option value='B'>B</option>
-									<option value='B'>C</option>
-									<option value='D'>D</option>
-									<option value='E'>E</option>
-									<option value='F'>F</option>
-									<option value='G'>G</option>
-									<option value='H'>H</option>
-									<option value='I'>I</option>
-									<option value='AA'>AA</option>
-									<option value='AB'>AB</option>
-									<option value='AC'>AC</option>
-									<option value='AD'>AD</option>
-									<option value='AE'>AE</option>
-									<option value='BB'>BB</option>
-									<option value='BC'>BC</option>
-									<option value='CC'>CC</option>
-									<option value='CD'>CD</option>
-									<option value='CE'>CE</option>
-									<option value='DD'>DD</option>
-									<option value='DE'>DE</option>
+									<option key="A2" value='A'>A</option>
+									<option key="B2" value='B'>B</option>
+									<option key="C2" value='B'>C</option>
+									<option key="D2" value='D'>D</option>
+									<option key="E2" value='E'>E</option>
+									<option key="F2" value='F'>F</option>
+									<option key="G2" value='G'>G</option>
+									<option key="H2" value='H'>H</option>
+									<option key="I2" value='I'>I</option>
+									<option key="AA2" value='AA'>AA</option>
+									<option key="AB2" value='AB'>AB</option>
+									<option key="AC2" value='AC'>AC</option>
+									<option key="AD2" value='AD'>AD</option>
+									<option key="AE2" value='AE'>AE</option>
+									<option key="BB2" value='BB'>BB</option>
+									<option key="BC2" value='BC'>BC</option>
+									<option key="CC2" value='CC'>CC</option>
+									<option key="CD2" value='CD'>CD</option>
+									<option key="CE2" value='CE'>CE</option>
+									<option key="DD2" value='DD'>DD</option>
+									<option key="DE2" value='DE'>DE</option>
 								</select>
 							</div>
 
@@ -361,10 +443,10 @@ const Location = () => {
 									<option value='' selected disabled>
 										--Orientación--
 									</option>
-									<option value='Sur'>Sur</option>
-									<option value='Norte'>Norte</option>
-									<option value='Oeste'>Oeste</option>
-									<option value='Este'>Este</option>
+									<option key="sur2" value='Sur'>Sur</option>
+									<option key="norte2" value='Norte'>Norte</option>
+									<option key="oeste2" value='Oeste'>Oeste</option>
+									<option key="este2" value='Este'>Este</option>
 								</select>
 							</div>
 
@@ -373,7 +455,7 @@ const Location = () => {
 							</div>
 
 							<div className='col-md-2 mt-4 mt-md-0'>
-								<label htmlFor='indicativo' className="form-label">Indicativo</label>
+								<label htmlFor='indicativo' className="form-label">Indicativo <span style={ { color: 'red', fontWeight: 'bolder' } }>*</span></label>
 								<input
 									type='number'
 									name='indicativo'
@@ -381,6 +463,8 @@ const Location = () => {
 									className="form-control"
 									onChange={handleChange}
 									value={indicativo}
+									key="indicativo"
+									// required
 								/>
 							</div>
 						</div>
@@ -396,17 +480,35 @@ const Location = () => {
 							placeholder="Manzana, Urbanización, Núcleo, Bloque, apartamento"
 							onChange={handleChange}
 							value={indicaciones}
+							key="indicaciones"
 						/>
 							
 					</div>
 
 					<div className='d-flex justify-content-end mt-5'>
-						<button type='button' className='btn btn-primary btn-lg'>
+						<button type='submit' className='btn btn-primary btn-lg'>
 							Consultar
 						</button>
 					</div>
 				</div>
 			</form>
+
+			{/* <div className="my-3 border border-1 rounded w-100" style={ { backgroundColor: '#f7f7f7' } } >
+				<p>País:  {pais}</p>
+				<p>Departamento:  {departamento}</p>
+				<p>Municipio:  {municipio}</p>
+				<p>Comuna:  {comuna}</p>
+				<p>Barrio:  {barrio}</p>
+				<p>Tipo:  {via}</p>
+				<p>Número:  {numero1}</p>
+				<p>Letra:  {letra1}</p>
+				<p>Orientación:  {orientacion1}</p>
+				<p>Número:  {numero2}</p>
+				<p>Letra:  {letra2}</p>
+				<p>Orientación:  {orientacion2}</p>
+				<p>Indicactivo:  {indicativo}</p>
+				<p>Indicaciones:  {indicaciones}</p>
+			</div> */}
 		</section>
 	);
 };
