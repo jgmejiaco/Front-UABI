@@ -13,6 +13,9 @@ const Card = ({ name, path }: ICardProps) => {
 				</div>
 				<div className='card-body'>
 					<p>Haz clic para acceder a esta sección.</p>
+					{/* <p></p>
+					<p>Proyectos</p>
+					<p>Bienes Inmuebles</p> */}
 				</div>
 			</div>
 		</div>

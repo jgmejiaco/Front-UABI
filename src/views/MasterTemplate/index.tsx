@@ -14,11 +14,13 @@ import Home from './pages/Home';
 import { PrivateRoute } from '../../utils/components/PrivateRoute';
 import { useEffect, useState, Component } from 'react';
 import Projects from './pages/Projects';
-import RealEstate from './pages/RealEstate';
+import CreateRealEstate from './pages/RealEstate/components/CreateRealEstate';
 import CreateProject from './pages/Projects/components/CreateProject';
 import EstateAreas from './pages/EstateAreas';
 import DetailProject from './pages/Projects/components/DetailProject';
 import EditProject from './pages/Projects/components/EditProject';
+import RealEstate from './pages/RealEstate';
+import DetailRealEstate from './pages/RealEstate/components/DetailRealEstate';
 
 function MasterTemplate() {
 	let { path, url } = useRouteMatch();
@@ -50,38 +52,56 @@ function MasterTemplate() {
 							<Registros />
 						</PrivateRoute>
 						<PrivateRoute
-							path='/realEstates/areas/create'
+							path='/adquisitions/real-estates/areas/create'
 							isAuthenticated={isAuthenticated}
 						>
 							<EstateAreas />
 						</PrivateRoute>
 						<PrivateRoute
-							path='/realEstates/create'
+							path='/adquisitions/real-estates/create'
 							isAuthenticated={isAuthenticated}
 						>
-							<RealEstate name='Crear' />
+							<CreateRealEstate name='Crear' />
 						</PrivateRoute>
 						<PrivateRoute
-							path='/realEstates/edit'
+							path='/adquisitions/real-estates/edit'
 							isAuthenticated={isAuthenticated}
 						>
-							<RealEstate name='Editar' />
+							<CreateRealEstate name='Editar' />
 						</PrivateRoute>
-						<PrivateRoute path='/realEstates' isAuthenticated={isAuthenticated}>
-							<Projects name='Bienes Inmuebles' />
+
+						<Route path='/adquisitions/real-estates/edit/:id'>
+							{/* <EditRealEstate /> */}
+						</Route>
+						<Route
+							path='/adquisitions/real-estates/:id'
+							component={DetailRealEstate}
+						/>
+
+						<PrivateRoute
+							path='/adquisitions/real-estates'
+							isAuthenticated={isAuthenticated}
+						>
+							<RealEstate />
 						</PrivateRoute>
 
 						<PrivateRoute
-							path='/projects/create'
+							path='/adquisitions/projects/create'
 							isAuthenticated={isAuthenticated}
 						>
 							<CreateProject name='Crear Proyecto' />
 						</PrivateRoute>
-						<Route path='/projects/edit/:id'>
+						<Route path='/adquisitions/projects/edit/:id'>
 							<EditProject />
 						</Route>
-						<Route path='/projects/:id' component={DetailProject} />
-						<PrivateRoute path='/projects' isAuthenticated={isAuthenticated}>
+						<Route
+							path='/adquisitions/projects/:id'
+							component={DetailProject}
+						/>
+						<PrivateRoute
+							path='/adquisitions/projects'
+							isAuthenticated={isAuthenticated}
+						>
 							<Projects name='Proyectos' />
 						</PrivateRoute>
 					</Switch>
