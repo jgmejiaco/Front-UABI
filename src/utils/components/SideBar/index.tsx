@@ -1,5 +1,4 @@
 import tmpImg from './../../assets/img/medellin.png';
-import { Link } from 'react-router-dom';
 import SBItem from './components/SBItem';
 
 const SideBar = () => {

@@ -1,10 +1,4 @@
-import {
-	Route,
-	BrowserRouter as Router,
-	Switch,
-	useRouteMatch,
-	Redirect,
-} from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Registros from './pages/Registros';
 import SideBar from '../../utils/components/SideBar';
@@ -12,7 +6,7 @@ import TopBar from './../../utils/components/TopBar/index';
 import Location from '../../utils/components/Location';
 import Home from './pages/Home';
 import { PrivateRoute } from '../../utils/components/PrivateRoute';
-import { useEffect, useState, Component } from 'react';
+import { useEffect, useState } from 'react';
 import Projects from './pages/Projects';
 import CreateRealEstate from './pages/RealEstate/components/CreateRealEstate';
 import CreateProject from './pages/Projects/components/CreateProject';
@@ -23,8 +17,6 @@ import RealEstate from './pages/RealEstate';
 import DetailRealEstate from './pages/RealEstate/components/DetailRealEstate';
 
 function MasterTemplate() {
-	let { path, url } = useRouteMatch();
-
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	useEffect(() => {
