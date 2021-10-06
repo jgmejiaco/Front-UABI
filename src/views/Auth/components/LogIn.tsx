@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import * as actions from './../../store/actions/userAction';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import {
 	Form,
 	Image,
 	Header,
 	Input,
-	Checkbox,
 	Button,
 	Grid,
+	Icon,
+	SemanticICONS,
 } from 'semantic-ui-react';
 
 import loginimage from './../../../utils/assets/img/login.jpeg';
 import logo from './../../../utils/assets/img/escudoAlcaldia.png';
-import { signIn } from './../../../apis/authentification';
+import { signIn } from '../../../apis/authentification';
 
 export default function SignIn() {
 	const history = useHistory();
@@ -22,36 +23,43 @@ export default function SignIn() {
 	const [contraseña, setContraseña] = useState('');
 	const [contenidopassword, setContenidopassword] = useState('VER');
 	const [tipopassword, setTipoPassword] = useState('password');
+	const [passwordVisibled, setPasswordVisibled] = useState(false);
+	const [iconVisibility, setIconVisibility] = useState<SemanticICONS>('eye');
 
 	async function ingresarUsuario() {
 		try {
-			let token: AxiosResponse<any> | string = await signIn(
-				idusuario,
-				contraseña
-			);
-			if (typeof token === 'string') {
-				alert('Any error');
-				return;
-			}
-			console.log(token);
+			let res: AxiosResponse<any> | any = await signIn(idusuario, contraseña);
+			console.log(res);
 
-			localStorage.setItem('token', token.data);
-			history.push('/');
-			window.location.reload();
+			if (res.status == 200) {
+				localStorage.setItem('token', res.data);
+
+				history.push('/');
+				window.location.reload();
+			} else {
+				console.error(res[0]);
+				await alert(res[0].response.data.mensaje);
+			}
 		} catch (error) {
 			console.error(error);
 		}
 	}
-	function mostrarContraseña() {
+
+	const handleAltVisibility = () => {
+		setPasswordVisibled(!passwordVisibled);
+	};
+
+	const altVisibilityPassword = () => {
 		if (contraseña.trim() === '') return;
-		if (contenidopassword.trim() === 'VER') {
-			setTipoPassword('input');
-			setContenidopassword('OCULTAR');
-		} else {
-			setTipoPassword('password');
-			setContenidopassword('VER');
-		}
-	}
+
+		setTipoPassword(passwordVisibled ? 'input' : 'password');
+		setContenidopassword(passwordVisibled ? 'Ocultar' : 'Mostrar');
+		setIconVisibility(passwordVisibled ? 'eye slash' : 'eye');
+	};
+
+	useEffect(() => {
+		altVisibilityPassword();
+	}, [passwordVisibled]);
 
 	return (
 		<div>
@@ -68,15 +76,18 @@ export default function SignIn() {
 							<Form.Field>
 								<Header as='h2' className='sub-header-login'>
 									Sistema para la Administración de Bienes Inmuebles
-									{/* <Header.Subheader className='sub-header-login'>
-										Inicie sesión para acceder al sistema
-									</Header.Subheader> */}
 								</Header>
 							</Form.Field>
 							<Form.Field className='container-inputs-login usuario-item-login'>
 								<label>Usuario</label>
 								<Input
 									onChange={(e) => setIdusuario(e.target.value)}
+									onKeyPress={(e: any) => {
+										if (e.charCode === 13) {
+											ingresarUsuario();
+										}
+									}}
+									placeholder='Ej.: maria.paulina'
 									value={idusuario}
 								/>
 							</Form.Field>
@@ -84,20 +95,33 @@ export default function SignIn() {
 								<label>Contraseña</label>
 								<Input
 									onChange={(e) => setContraseña(e.target.value)}
+									onKeyPress={(e: any) => {
+										if (e.charCode === 13) {
+											ingresarUsuario();
+										}
+									}}
 									value={contraseña}
 									type={tipopassword}
+									placeholder='Ej.: Y7ai-*892mndUH'
 									action={
 										<Button
+											animated='vertical'
 											basic
 											color='blue'
-											content={contenidopassword}
-											onClick={mostrarContraseña}
-										/>
+											onClick={handleAltVisibility}
+										>
+											<Button.Content hidden>
+												{contenidopassword}
+											</Button.Content>
+											<Button.Content visible>
+												<Icon name={iconVisibility} />
+											</Button.Content>
+										</Button>
 									}
 								/>
 							</Form.Field>
 
-							<Form.Field className='container-flex-end'>
+							<Form.Field className='container-flex-start'>
 								<Header
 									size='small'
 									color='blue'
@@ -106,7 +130,7 @@ export default function SignIn() {
 									Validar código de verificación
 								</Header>
 							</Form.Field>
-							<Form.Field className='container-space-between'>
+							<Form.Field className='container-flex-end'>
 								{/* <Button
 									color='black'
 									className='boton-ingresar-login'

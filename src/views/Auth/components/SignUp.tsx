@@ -9,8 +9,8 @@ import {
 	Grid,
 	Select,
 } from 'semantic-ui-react';
-import axios from 'axios';
 import moment from 'moment';
+import axios from 'axios';
 
 import loginimage from './../../../utils/assets/img/login.jpeg';
 import logo from './../../../utils/assets/img/escudoAlcaldia.png';
@@ -43,27 +43,28 @@ const Register = () => {
 	async function registrarUsuario() {
 		let fecha_creacion = moment().format('YYYY-MM-DD');
 		let fecha_actualizacion = moment().format('YYYY-MM-DD');
-		// axios
-		// 	.post(`${process.env.REACT_APP_PAGE_HOST}api/usuarios`, {
-		// 		id_tipo,
-		// 		idusuario,
-		// 		contraseña,
-		// 		nombres,
-		// 		apellidos,
-		// 		tipo_identificacion,
-		// 		direccion,
-		// 		telefono,
-		// 		email,
-		// 		fecha_creacion,
-		// 		fecha_actualizacion,
-		// 	})
-		// 	.then((data) => {
-		// 		console.log(data);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.error(error.response);
-		// 	});
-		history.push('/auth');
+		try {
+			const data = await axios.post(
+				`${process.env.REACT_APP_PAGE_HOST}api/usuarios`,
+				{
+					id_tipo,
+					idusuario,
+					contraseña,
+					nombres,
+					apellidos,
+					tipo_identificacion,
+					direccion,
+					telefono,
+					email,
+					fecha_creacion,
+					fecha_actualizacion,
+				}
+			);
+			console.log(data);
+			history.push('/auth');
+		} catch (error: any) {
+			console.error(error.response);
+		}
 	}
 
 	return (
@@ -125,7 +126,7 @@ const Register = () => {
 									<Select
 										placeholder='Seleccione el tipo de identificacion'
 										options={tiposidentificacion}
-										onChange={(e, { value }) => {
+										onChange={(e: any, { value }: any) => {
 											if (typeof value !== 'undefined') {
 												setTipo_identificacion(value.toString());
 											}

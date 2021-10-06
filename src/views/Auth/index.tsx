@@ -5,22 +5,25 @@ import {
 	useRouteMatch,
 	Redirect,
 } from 'react-router-dom';
-import Register from './components/Register';
-import SignIn from './components/SignIn';
+
+// Components
+import SignUp from './components/SignUp';
+import LogIn from './components/LogIn';
 
 const Auth = () => {
-	let { path, url } = useRouteMatch();
+	let { path } = useRouteMatch();
 	return (
+		// Router for sub pages: Login and Register.
 		<Router>
 			<Switch>
 				<Route exact path={path}>
-					<Redirect to={{ pathname: `${path}/signin` }} />
+					<Redirect to={{ pathname: `${path}/login` }} />
 				</Route>
-				<Route path={`${path}/signin`}>
-					<SignIn />
+				<Route path={`${path}/login`}>
+					<LogIn />
 				</Route>
 				<Route path={`${path}/signup`}>
-					<Register />
+					<SignUp />
 				</Route>
 			</Switch>
 		</Router>
