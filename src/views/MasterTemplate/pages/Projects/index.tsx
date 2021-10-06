@@ -169,20 +169,21 @@ const Projects = ({ name }: IProps) => {
 									</tr>
 								</thead>
 								<tbody>
-									{projectsArray.map((project) => {
-										let creationDate = new Date(
-											parseFloat(project.audit_trail.created_on) * 1000
-										).toDateString();
-										return (
-											<ItemProject
-												id={project.id}
-												name={project.name}
-												dependency={project.dependency}
-												creationDate={creationDate}
-												createdBy={project.audit_trail.created_by}
-											/>
-										);
-									})}
+									{typeof projectsArray !== 'undefined' &&
+										projectsArray.map((project) => {
+											let creationDate = new Date(
+												parseFloat(project.audit_trail.created_on) * 1000
+											).toDateString();
+											return (
+												<ItemProject
+													id={project.id}
+													name={project.name}
+													dependency={project.dependency}
+													creationDate={creationDate}
+													createdBy={project.audit_trail.created_by}
+												/>
+											);
+										})}
 								</tbody>
 							</Table>
 							<nav aria-label='Page navigation example'>
