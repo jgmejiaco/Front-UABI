@@ -17,6 +17,7 @@ const DetailProject = () => {
 		id: '',
 		name: '',
 		description: '',
+		dependency: '',
 		audit_trail: {
 			created_by: '',
 			created_on: '',
@@ -46,7 +47,13 @@ const DetailProject = () => {
 			<div className='container-fluid'>
 				<div className='row justify-content-center'>
 					<div className='col-md-12'>
-						<div style={{ backgroundColor: 'white', borderRadius: 15 }}>
+						<div
+							style={{
+								backgroundColor: 'white',
+								borderRadius: 15,
+								padding: '10px 20px',
+							}}
+						>
 							<h5>
 								<b>Proyecto:</b> {project.name}
 							</h5>
@@ -107,29 +114,25 @@ const DetailProject = () => {
 											<div id='emailHelp' className='form-text'></div>
 										</div>
 
-										<div className='col'>
-											<label htmlFor='form-select' className='form-label'>
+										<div className='col-3'>
+											<label
+												htmlFor='exampleInputEmail1'
+												className='form-label'
+											>
 												Destinación
 											</label>
-											<select
-												className='form-select'
-												aria-label='Default select example'
-											>
-												<option value='' selected disabled hidden>
-													Selecciona una Destinación
-												</option>
-												<option value='1'>Público</option>
-												<option value='2'>Fiscal</option>
-												<option value='3'>Mixto</option>
-											</select>
+											<input
+												type=''
+												className='form-control'
+												id='exampleInputEmail1'
+												aria-describedby='emailHelp'
+												value={project.dependency}
+												disabled
+											/>
+											<div id='emailHelp' className='form-text'></div>
 										</div>
 									</div>
 								</form>
-							</div>
-							<div className='col text-center'>
-								<button type='submit' className='btn btn-success my-3'>
-									Guardar
-								</button>
 							</div>
 						</div>
 					</div>

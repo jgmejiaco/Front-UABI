@@ -1,24 +1,35 @@
 import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { getProjects } from '../../../../apis/uabi';
+import { getRealEstates } from '../../../../apis/uabi';
 import {
-	IProjectAttributes,
+	IRealEstateAttributes,
 	IProjectsResponse,
+	IRealEstateResponse,
+	IRealEstatesResponse,
 } from '../../../../utils/interfaces/components.interfaces';
-import ItemProject from './components/ItemProject';
+import ItemRealEstate from './components/ItemRealEstate';
 
-interface IProps {
-	name: string;
-}
-
-const Projects = ({ name }: IProps) => {
-	const [projectsArray, setProjectsArray] = useState<IProjectAttributes[]>([
+const Projects = () => {
+	const [realEstates, setRealEstates] = useState<any[]>([
 		{
-			id: '',
+			id: -1,
+			dependency: '',
+			destination_type: '',
+			accounting_account: '',
+			cost_center: '',
+
+			registry_number: '',
 			name: '',
 			description: '',
-			dependency: '',
+
+			total_area: -1,
+			total_percentage: -1,
+			estate_type: '',
+			tipology: '',
+
+			project_id: -1,
+
 			audit_trail: {
 				created_by: '',
 				created_on: '',
@@ -31,12 +42,13 @@ const Projects = ({ name }: IProps) => {
 	]);
 
 	const _getProjects = async () => {
-		let projectsResponse: IProjectsResponse | string = await getProjects();
+		let realEstatesResponse: IRealEstatesResponse | string =
+			await getRealEstates();
 
-		if (typeof projectsResponse !== 'string') {
-			let tmpData = projectsResponse.data;
+		if (typeof realEstatesResponse !== 'string') {
+			let tmpData = realEstatesResponse.data;
 
-			setProjectsArray(tmpData);
+			setRealEstates(tmpData);
 		}
 	};
 
@@ -63,7 +75,7 @@ const Projects = ({ name }: IProps) => {
 									alignItems: 'center',
 								}}
 							>
-								<h5>Administrar Proyectos</h5>
+								<h5>Administrar Bienes Inmuebles</h5>
 								<Link
 									className='justify-content-end'
 									style={{
@@ -73,7 +85,7 @@ const Projects = ({ name }: IProps) => {
 										alignItems: 'center',
 										textDecoration: 'none',
 									}}
-									to='/adquisitions/projects/create'
+									to='/adquisitions/real-estates/create'
 								>
 									<i
 										className='fa fa-plus-circle'
@@ -134,10 +146,13 @@ const Projects = ({ name }: IProps) => {
 											ID
 										</th>
 										<th scope='col' className='align-top'>
+											Matricula
+										</th>
+										<th scope='col' className='align-top'>
 											Nombre
 										</th>
 										<th scope='col' className='align-top'>
-											Dependencia
+											Proyecto Asociado
 										</th>
 										<th scope='col' className='align-top'>
 											Fecha Creación
@@ -169,17 +184,16 @@ const Projects = ({ name }: IProps) => {
 									</tr>
 								</thead>
 								<tbody>
-									{projectsArray.map((project) => {
+									{realEstates.map((project) => {
 										let creationDate = new Date(
 											parseFloat(project.audit_trail.created_on) * 1000
 										).toDateString();
 										return (
-											<ItemProject
+											<ItemRealEstate
 												id={project.id}
+												matricula={project.registry_number}
 												name={project.name}
-												dependency={project.dependency}
 												creationDate={creationDate}
-												createdBy={project.audit_trail.created_by}
 											/>
 										);
 									})}

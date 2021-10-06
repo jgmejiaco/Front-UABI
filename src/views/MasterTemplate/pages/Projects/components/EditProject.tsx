@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getProject } from '../../../../../apis/uabi';
+import { useParams, useHistory } from 'react-router-dom';
+import { getProject, updateProject } from '../../../../../apis/uabi';
 import {
 	IProjectAttributes,
 	IProjectResponse,
@@ -13,10 +13,12 @@ interface IProps {
 
 const DetailProject = () => {
 	const { id } = useParams<IProps>();
+	const history = useHistory();
 	const [project, setProject] = useState<IProjectAttributes>({
 		id: '',
 		name: '',
 		description: '',
+		dependency: '',
 		audit_trail: {
 			created_by: '',
 			created_on: '',
@@ -37,9 +39,30 @@ const DetailProject = () => {
 		}
 	};
 
+	const _updateProject = async () => {
+		let res: any = await updateProject(
+			{ name: project.name, description: project.description },
+			parseInt(project.id)
+		);
+
+		console.log(res);
+		await alert(res.data.message);
+		history.push(`/adquisitions/projects/${project.id}`);
+	};
+
 	useEffect(() => {
 		_getProject();
 	}, []);
+
+	const handleChange = (e: any) => {
+		console.log(e.target.name);
+		console.log(e.target.value);
+
+		setProject({
+			...project,
+			[e.target.name]: e.target.value,
+		});
+	};
 
 	return (
 		<section className='pt-5' id='texto-superior'>
@@ -73,36 +96,32 @@ const DetailProject = () => {
 											</fieldset>
 										</div>
 										<div className='col-3'>
-											<label
-												htmlFor='exampleInputEmail1'
-												className='form-label'
-											>
+											<label htmlFor='name' className='form-label'>
 												Nombre Proyecto
 											</label>
 											<input
-												type=''
+												type='text'
 												className='form-control'
-												id='exampleInputEmail1'
-												aria-describedby='emailHelp'
+												id='name'
+												name='name'
 												value={project.name}
+												onChange={handleChange}
 											/>
 											<div id='emailHelp' className='form-text'></div>
 										</div>
-										<div className='col-6'>
-											<label
-												htmlFor='exampleInputEmail1'
-												className='form-label'
-											>
-												Descripción Proyecto
+
+										<div className='md-form col-6'>
+											<label htmlFor='description'>
+												Descripción del Proyecto
 											</label>
-											<input
-												type=''
-												className='form-control'
-												id='exampleInputEmail1'
-												aria-describedby='emailHelp'
+											<textarea
+												id='description'
+												className='md-textarea form-control'
+												rows={3}
+												name='description'
 												value={project.description}
-											/>
-											<div id='emailHelp' className='form-text'></div>
+												onChange={handleChange}
+											></textarea>
 										</div>
 
 										<div className='col'>
@@ -112,22 +131,36 @@ const DetailProject = () => {
 											<select
 												className='form-select'
 												aria-label='Default select example'
+												name='dependency'
+												onChange={handleChange}
 											>
-												<option value='' selected disabled hidden>
-													Selecciona una Destinación
+												<option
+													value='PÚBLICO'
+													selected={project.dependency === 'PÚBLICO'}
+												>
+													Público
 												</option>
-												<option value='1'>Público</option>
-												<option value='2'>Fiscal</option>
-												<option value='3'>Mixto</option>
+												<option
+													value='FISCAL'
+													selected={project.dependency === 'FISCAL'}
+												>
+													Fiscal
+												</option>
+												<option
+													value='MIXTO'
+													selected={project.dependency === 'MIXTO'}
+												>
+													Mixto
+												</option>
 											</select>
 										</div>
 									</div>
 								</form>
 							</div>
 							<div className='col text-center'>
-								<button type='submit' className='btn btn-success my-3'>
+								<div className='btn btn-success my-3' onClick={_updateProject}>
 									Guardar
-								</button>
+								</div>
 							</div>
 						</div>
 					</div>

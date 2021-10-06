@@ -1,14 +1,15 @@
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { CSSProperties } from 'react';
-import { IItemProject } from '../../../../../utils/interfaces/components.interfaces';
+import { IItemRealEstate } from '../../../../../utils/interfaces/components.interfaces';
 
-const ItemProject = ({
+const ItemRealEstate = ({
 	id,
+	matricula,
 	name,
 	dependency,
 	creationDate,
 	createdBy,
-}: IItemProject) => {
+}: IItemRealEstate) => {
 	let { path, url } = useRouteMatch();
 	const history = useHistory();
 
@@ -24,7 +25,7 @@ const ItemProject = ({
 	return (
 		<tr>
 			<th scope='row'>{id}</th>
-			<td>{name}</td>
+			<td>{matricula}</td>
 			<td>{dependency}</td>
 
 			<td>{creationDate}</td>
@@ -40,13 +41,16 @@ const ItemProject = ({
 						justifyContent: 'space-around',
 					}}
 				>
-					<Link to={`/adquisitions/projects/${id}`} style={LinkStyle}>
+					<Link to={`/adquisitions/real-estates/${id}`} style={LinkStyle}>
 						<i className='fa fa-eye' aria-hidden='true'></i>
 					</Link>
-					<Link to={`/adquisitions/projects/edit/${id}`} style={LinkStyle}>
+					<Link to={`/adquisitions/real-estates/edit/${id}`} style={LinkStyle}>
 						<i className='fa fa-pencil' aria-hidden='true'></i>
 					</Link>
-					<Link to={`/adquisitions/projects/delete?id=${id}`} style={LinkStyle}>
+					<Link
+						to={`/adquisitions/real-estates/delete?id=${id}`}
+						style={LinkStyle}
+					>
 						<i className='fa fa-trash' aria-hidden='true'></i>
 					</Link>
 				</div>
@@ -55,4 +59,4 @@ const ItemProject = ({
 	);
 };
 
-export default ItemProject;
+export default ItemRealEstate;

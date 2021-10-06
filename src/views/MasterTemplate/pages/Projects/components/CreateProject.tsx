@@ -8,9 +8,15 @@ interface IProps {
 const CreateRealEstate = ({ name }: IProps) => {
 	const [projectName, setProjectName] = useState('');
 	const [projectDescription, setProjectDescription] = useState('');
+	const [dependency, setDependency] = useState('');
 
 	const _createProject = async () => {
-		const response = await createProject(projectName, projectDescription);
+		const response: any = await createProject(
+			projectName,
+			projectDescription,
+			dependency
+		);
+		await alert(response.message);
 		console.log(response);
 	};
 
@@ -19,7 +25,13 @@ const CreateRealEstate = ({ name }: IProps) => {
 			<div className='container-fluid'>
 				<div className='row justify-content-center'>
 					<div className='col-md-12'>
-						<div style={{ backgroundColor: 'white', borderRadius: 15 }}>
+						<div
+							style={{
+								backgroundColor: 'white',
+								borderRadius: 15,
+								padding: '10px 20px',
+							}}
+						>
 							<h5>{name}</h5>
 							<hr />
 							<div className='container'>
@@ -64,18 +76,21 @@ const CreateRealEstate = ({ name }: IProps) => {
 
 										<div className='col'>
 											<label htmlFor='form-select' className='form-label'>
-												Destinación
+												Dependecia
 											</label>
 											<select
 												className='form-select'
 												aria-label='Default select example'
+												onChange={(e: any) => {
+													setDependency(e.target.value);
+												}}
 											>
 												<option value='' selected disabled hidden>
 													Selecciona una Destinación
 												</option>
-												<option value='Público'>Público</option>
-												<option value='2'>Fiscal</option>
-												<option value='3'>Mixto</option>
+												<option value='PÚBLICO'>Público</option>
+												<option value='FISCAL'>Fiscal</option>
+												<option value='MIXTO'>Mixto</option>
 											</select>
 										</div>
 									</div>
