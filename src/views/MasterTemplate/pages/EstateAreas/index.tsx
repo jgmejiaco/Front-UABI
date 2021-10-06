@@ -5,7 +5,7 @@ const EstateAreas = () => {
 				<div className='row justify-content-center'>
 					<div className='col-md-12'>
 						<div style={{ backgroundColor: 'white', borderRadius: 15 }}>
-							<h5>Crear Area</h5>
+							<h5><b>Creando:</b> Area</h5>
 							<hr />
 							<div className='container'>
 								<form>
@@ -60,7 +60,7 @@ const EstateAreas = () => {
 												htmlFor='exampleInputEmail1'
 												className='form-label'
 											>
-												Nombre Inmueble
+												Nombre
 											</label>
 											<input
 												type=''
@@ -75,7 +75,7 @@ const EstateAreas = () => {
 												htmlFor='exampleInputEmail1'
 												className='form-label'
 											>
-												Descripción Inmueble
+												Descripción
 											</label>
 											<input
 												type=''
