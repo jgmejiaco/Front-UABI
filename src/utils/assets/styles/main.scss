@@ -173,20 +173,26 @@ main {
 }
 
 .containerLocation {
-	background-color: #E0E0E0;
-	border-radius: 15px;
-	border: 1px solid black;
+	background-color: #f7f7f7;
+    border-radius: 15px;
+    border: 1px solid;
+}
+
+.innerContainerLocation {
 	padding: 2rem;
 }
 
 .containerLocation select {
 	width: 100%;
-	border-radius: 8px;
-	padding: 0.3rem;
+	border-radius: 0.25rem;
 }
 
 .containerLocation input[type=number] {
 	width: 100%;
-	border-radius: 8px;
-	padding: 0.3rem;
+	border-radius: 0.25rem;
+}
+
+.containerLocation input[type=text] {
+	width: 100%;
+	border-radius: 0.25rem;
 }
