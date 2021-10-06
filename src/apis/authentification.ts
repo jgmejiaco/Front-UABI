@@ -9,8 +9,8 @@ export const signIn = async (idusuario: string, contraseña: string) => {
 				contraseña,
 			}
 		);
-	} catch (error) {
+	} catch (error: any) {
 		console.error(error);
-		return 'Error';
+		return [error];
 	}
 };
