@@ -168,31 +168,37 @@ main {
 }
 
 .mainContainerLocation {
-	background-color: white;
-	padding: 2rem;
+    background-color: #F7FBFF;
+    padding: 2rem;
 }
 
 .containerLocation {
-	background-color: #f7f7f7;
-    border-radius: 15px;
-    border: 1px solid;
+    background-color: white;
+    box-shadow: 0px 3px 10px #00000029;
+    border-radius: 11px;
 }
 
 .innerContainerLocation {
-	padding: 2rem;
+    padding: 2rem;
+    // color: #535353;
+
 }
 
 .containerLocation select {
-	width: 100%;
-	border-radius: 0.25rem;
+    width: 100%;
+    border: 1px solid #C3C3C3;
+    border-radius: 5px; 
 }
 
 .containerLocation input[type=number] {
-	width: 100%;
-	border-radius: 0.25rem;
+    width: 100%;
+    border: 1px solid #C3C3C3;
+    border-radius: 5px;
 }
 
 .containerLocation input[type=text] {
-	width: 100%;
-	border-radius: 0.25rem;
+    width: 100%;
+    border: 1px solid #C3C3C3;
+    border-radius: 5px;
 }
+
