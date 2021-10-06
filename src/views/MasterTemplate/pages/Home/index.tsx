@@ -7,7 +7,7 @@ const Home = () => {
 				<div className='container'>
 					<div className='row'>
 						<div className='col-md-12 text-center'>
-							<h4>Bienvenido a sistema de información UABI</h4>
+							<h4>Bienvenido al sistema de información para administración de bienes inmuebles</h4>
 							<p>
 								Encuentra aquí los accesos rápidos a las funciones más
 								utilizadas.
