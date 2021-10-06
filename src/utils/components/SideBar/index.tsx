@@ -16,33 +16,26 @@ const SideBar = () => {
 					collapse={false}
 					sublinks={[{ to: '', name: 'Inicio' }]}
 				/>
-				<SBItem
-					id='projects'
-					name='Proyectos'
-					sublinks={[
-						{ to: '/', name: 'Lista' },
-						{ to: '/create', name: 'Nuevo' },
-						{ to: '/edit', name: 'Editar' },
-					]}
-				/>
+
 				<SBItem
 					id='adquisitions'
-					name='Registro'
+					name='Adquisición'
 					sublinks={[
-						{ to: '/', name: 'Adquisiones' },
-						{ to: '/create', name: 'Registro Contable - UABI' },
+						{ to: '/projects', name: 'Proyectos' },
+						{ to: '/real-estates', name: 'Bienes Inmuebles' },
 					]}
 				/>
 				<SBItem
-					id='realEstates'
-					name='Asegurabilidad'
-					sublinks={[
-						{ to: '/', name: 'Lista' },
-						{ to: '/create', name: 'Nuevo' },
-						{ to: '/edit', name: 'Editar' },
-					]}
+					id='registroContable'
+					name='Registro Contable - UABI'
+					sublinks={[{ to: '/', name: 'Registro Contable - UABI' }]}
 				/>
-				<SBItem id='bienesInmuebles/areas' name='Disposición' />
+				<SBItem id='asegurabilidad' name='Asegurabilidad' />
+				<SBItem
+					id='disposition'
+					name='Disposición'
+					sublinks={[{ to: '/real-estates/areas', name: 'Áreas' }]}
+				/>
 				<SBItem id='adquisisiones' name='Supervisión' />
 				<SBItem id='adquisisiones' name='Facturación' />
 				<SBItem id='adquisisiones' name='Mantenimiento' />
