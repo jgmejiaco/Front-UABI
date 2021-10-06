@@ -67,10 +67,10 @@ export default function SignIn() {
 							</Form.Field>
 							<Form.Field>
 								<Header as='h2' className='sub-header-login'>
-									Unidad Administración de Bienes Inmuebles - UABI -
-									<Header.Subheader className='sub-header-login'>
-										Inicie sesion o registrese para acceder al sistema
-									</Header.Subheader>
+									Sistema para la Administración de Bienes Inmuebles
+									{/* <Header.Subheader className='sub-header-login'>
+										Inicie sesión para acceder al sistema
+									</Header.Subheader> */}
 								</Header>
 							</Form.Field>
 							<Form.Field className='container-inputs-login usuario-item-login'>
@@ -96,31 +96,18 @@ export default function SignIn() {
 									}
 								/>
 							</Form.Field>
-							<Form.Field className='container-checkbox-login'>
-								<Checkbox
-									label='Recordar'
-									className='sub-container-checkbox-login checkbox-login'
-								/>
-								<Header
-									size='small'
-									color='blue'
-									className='sub-container-checkbox-login login-olvido-contraseña'
-									onClick={() => history.push('/OlvidoContraseña')}
-								>
-									¿Olvido la contraseña?
-								</Header>
-							</Form.Field>
+
 							<Form.Field className='container-flex-end'>
 								<Header
 									size='small'
 									color='blue'
 									className='login-olvido-contraseña'
 								>
-									Valida tu código de verificación
+									Validar código de verificación
 								</Header>
 							</Form.Field>
 							<Form.Field className='container-space-between'>
-								<Button
+								{/* <Button
 									color='black'
 									className='boton-ingresar-login'
 									onClick={() =>
@@ -128,7 +115,7 @@ export default function SignIn() {
 									}
 								>
 									Registrarme
-								</Button>
+								</Button> */}
 								<Button
 									color='blue'
 									className='boton-ingresar-login'
