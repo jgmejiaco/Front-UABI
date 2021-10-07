@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 const Location = () => {
     /*INICIO | STATES*/
 
-    //  Crear el State de captura de datos
+    //  State de captura de datos
     const [locationName, setLocationName] = useState({
         pais: '',
         departamento: '',
@@ -25,9 +25,6 @@ const Location = () => {
     //  State de Errores
     const [error, setError] = useState(false);
 
-    //  Resumen de la Consulta
-    // const [consulta, setConsulta] = useState( {  } );
-
     /*FIN | STATES*/
 
     /*================================================*/
@@ -36,28 +33,12 @@ const Location = () => {
     /* INICIO FUNCIONES QUE MODIFICAN LOS STATE's */
 
     //  Función que detecta los cambios de cada select e input del formulario y actualiza el State
-    const handleChange = (e: any) => {
-        console.log(e.target.name);
-        console.log(e.target.value);
-
+    const handleChange = ( e: any ) => {
         setLocationName({
             ...locationName,
             [e.target.name]: e.target.value
         });
     };
-
-    /*=======================================================*/
-
-    //  Función que recopila la consulta
-    // const resumenConsulta = (e: any) => {
-
-    //  setConsulta({
-    //      ...consulta,
-    //      // [e.target.name]: e.target.value
-    //  });
-    // };
-
-    // console.log(resumenConsulta);
 
     /*=======================================================*/
     /*=======================================================*/
@@ -70,23 +51,15 @@ const Location = () => {
 
     const handleSubmit = (e: FormElement) => {
         e.preventDefault();
-        console.log('Enviando datos del formulario....................');
-        // alert('Enviando datos del formulario....................');
 
         //  VALIDAR CAMPOS
         if(pais.trim() === '' || departamento.trim() === '' || municipio.trim() === '' || comuna.trim() === '' || barrio.trim() === '' || numero1.trim() === '' || numero2.trim() === '' || indicativo.trim() === '') {
-            // alert(`Los Campos país, departamento, municipio, comuna, barrio, Tipo, número, indicativo, no pueden ir vacios`);
             setError(true);
             return;
         }
 
         //  ELIMINAR EL MENSAJE PREVIO DE ERROR CUANDO NO HA PASADO LA VALIDACIÓN DE CAMPOS, CUANDO PASA, LO ELIMINAMOS
         setError(false);
-
-        //  ASIGNAR ID (crear el Key) ¿NECESARIO?
-
-        //  CREAR LA CONSULTA
-        
 
         //  REINICIAR EL FORM PARA DEJARLO EN CAMPOS VACIOS
         setLocationName({
@@ -105,7 +78,6 @@ const Location = () => {
             indicativo: '',
             indicaciones: ''
         });
-
     }
 
     /*=======================================================*/
@@ -140,12 +112,12 @@ const Location = () => {
                                 <option value='' selected disabled>
                                     --País--
                                 </option>
-                                <option key="colombia" value='Colombia'>Colombia</option>
-                                <option key="venezuela" value='Venezuela'>Venezuela</option>
-                                <option key="costarica" value='Costa Rica'>Costa Rica</option>
-                                <option key="panama" value='Panamá'>Panamá</option>
-                                <option key="brasil" value='Brasíl'>Brasil</option>
-                                <option key="ecuador" value='Ecuador'>Ecuador</option>
+                                <option key="co" value='Colombia'>Colombia</option>
+                                <option key="ve" value='Venezuela'>Venezuela</option>
+                                <option key="cr" value='Costa Rica'>Costa Rica</option>
+                                <option key="pa" value='Panamá'>Panamá</option>
+                                <option key="br" value='Brasíl'>Brasil</option>
+                                <option key="ec" value='Ecuador'>Ecuador</option>
                             </select>
                         </div>
 
@@ -276,12 +248,6 @@ const Location = () => {
                                     <option key="diagonal" value='Diagonal'>Diagonal</option>
                                 </select>
                             </div>
-
-                            {/* <div className='col-md-2 pe-3 mt-sm-3 mt-md-0'>
-                                <div className='d-flex align-items-end '>
-                                    <p>#</p>
-                                </div>
-                            </div> */}
 
                             <div className='col-md-2 mt-4 mt-md-0 pe-sm-0'>
                                 <label htmlFor='number1' className="form-label">Número <span style={ { color: 'red', fontWeight: 'bolder' } }>*</span></label>
