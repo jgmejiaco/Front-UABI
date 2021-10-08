@@ -88,9 +88,15 @@ const CreateRealEstate = ({ name }: IProps) => {
 												<option value='' selected disabled hidden>
 													Selecciona una Destinación
 												</option>
-												<option value='PÚBLICO'>Público</option>
-												<option value='FISCAL'>Fiscal</option>
-												<option value='MIXTO'>Mixto</option>
+												<option value='Dependencia Infraestructura'>
+													Dependencia Infraestructura
+												</option>
+												<option value='Dependencia Salud'>
+													Dependencia Salud
+												</option>
+												<option value='Dependencia Educación'>
+													Dependencia Educación
+												</option>
 											</select>
 										</div>
 									</div>
