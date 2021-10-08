@@ -12,6 +12,7 @@ import {
 } from '../../../../../utils/interfaces/components.interfaces';
 import { Input, Table } from 'semantic-ui-react';
 import ItemRealEstate from './ItemRealEstate';
+import AdquisitionsFrom from "./AdquisitionsForm";
 
 interface IProps {
 	name: string;
@@ -498,229 +499,7 @@ const RealEstate = ({ name }: IProps) => {
 									</div>
 
 									{/* Adquisitions */}
-									<div
-										className='row py-3 my-3'
-										style={{
-											backgroundColor: '#f7f7f7',
-											borderRadius: 15,
-											border: '1px solid',
-										}}
-									>
-										<h5>Información de Adquisición</h5>
-
-										<div className='col-3'>
-											<label htmlFor='form-select' className='form-label'>
-												Tipo de Adquisición
-											</label>
-											<select
-												className='form-select'
-												aria-label='Default select example'
-												name='acquisition_type'
-												onChange={handleChange}
-											>
-												<option value='1' selected>
-													Compraventa
-												</option>
-												<option value='2'>Donación</option>
-												<option value='3'>Expropiación</option>
-												<option value='4'>Permuta</option>
-												<option value='5'>Cesión a título gratuito</option>
-												<option value='6'>Dación en pago</option>
-												<option value='7'>Obigaciones Urbanísticas</option>
-											</select>
-										</div>
-										<div className='col-3'>
-											<label htmlFor='form-select' className='form-label'>
-												Tipo de activo
-											</label>
-											<select
-												className='form-select'
-												aria-label='Default select example'
-											>
-												<option value='1' selected>
-													Lote
-												</option>
-												<option value='2'>Construccion</option>
-												<option value='3'>Mejora</option>
-												<option value='4'>Construcción para demoler</option>
-											</select>
-										</div>
-										<div className='col-3'>
-											<label htmlFor='form-select' className='form-label'>
-												Tipo de Título
-											</label>
-											<select
-												className='form-select'
-												aria-label='Default select example'
-											>
-												<option value='1' selected>
-													--
-												</option>
-												<option value='2'>Acta</option>
-												<option value='3'>Mejora</option>
-												<option value='4'>Construcción para demoler</option>
-											</select>
-										</div>
-										<div className='col-3'>
-											<div className='mb-3'>
-												<label htmlFor='formFile' className='form-label'>
-													Default file input example
-												</label>
-												<input
-													className='form-control'
-													type='file'
-													id='formFile'
-												/>
-												<div id='emailHelp' className='form-text'>
-													Escritura.pdf
-												</div>
-											</div>
-										</div>
-										<div className='col-3'>
-											<label
-												htmlFor='exampleInputEmail1'
-												className='form-label'
-											>
-												No Acto administrativo
-											</label>
-											<input
-												type=''
-												className='form-control'
-												id='act_number'
-												aria-describedby='act_number'
-												name='act_number'
-												onChange={handleChange}
-											/>
-										</div>
-										<div className='col-3'>
-											<label
-												htmlFor='exampleInputEmail1'
-												className='form-label'
-											>
-												Valor de adquisición
-											</label>
-											<input
-												type=''
-												className='form-control'
-												id='patrimonial_value'
-												aria-describedby='patrimonial_value'
-												name='patrimonial_value'
-												onChange={handleChange}
-											/>
-										</div>
-										<div className='col-2'>
-											<label
-												htmlFor='exampleInputEmail1'
-												className='form-label'
-											>
-												Area Total (m2)
-											</label>
-											<input
-												type=''
-												className='form-control'
-												id='exampleInputEmail1'
-												aria-describedby='emailHelp'
-											/>
-										</div>
-										<div className='col-2'>
-											<label
-												htmlFor='exampleInputEmail1'
-												className='form-label'
-											>
-												Porcentaje Adquirido
-											</label>
-											<input
-												type=''
-												className='form-control'
-												id='exampleInputEmail1'
-												aria-describedby='emailHelp'
-											/>
-											<div id='emailHelp' className='form-text'></div>
-										</div>
-										<div className='col-3'>
-											<label htmlFor='form-select' className='form-label'>
-												Vendedor
-											</label>
-											<select
-												className='form-select'
-												aria-label='Default select example'
-											>
-												<option value='1' selected>
-													Alexander
-												</option>
-												<option value='2'>Sergio</option>
-												<option value='3'>Ximena</option>
-											</select>
-										</div>
-										{/* <div className='col-3'>
-											<label htmlFor='form-select' className='form-label'>
-												Comprador
-											</label>
-											<select
-												className='form-select'
-												aria-label='Default select example'
-											>
-												<option value='1' selected>
-													Alexander
-												</option>
-												<option value='2'>Sergio</option>
-												<option value='3'>Ximena</option>
-											</select>
-										</div> */}
-
-										<div className='col-3'>
-											<label htmlFor='form-select' className='form-label'>
-												Tipo de Entidad
-											</label>
-											<select
-												className='form-select'
-												aria-label='Default select example'
-											>
-												<option value='1' selected>
-													Notaría
-												</option>
-												<option value='2'>Sergio</option>
-												<option value='3'>Ximena</option>
-											</select>
-										</div>
-										<div className='col-3'>
-											<label
-												htmlFor='exampleInputEmail1'
-												className='form-label'
-											>
-												No. Entidad
-											</label>
-											<input
-												type=''
-												className='form-control'
-												id='exampleInputEmail1'
-												aria-describedby='emailHelp'
-											/>
-											<div id='emailHelp' className='form-text'></div>
-										</div>
-										<div className='col-4'>
-											<label
-												htmlFor='exampleInputEmail1'
-												className='form-label'
-											>
-												Dirección
-											</label>
-											<input
-												type=''
-												className='form-control'
-												id='address'
-												name='address'
-												onChange={handleChange}
-												placeholder='Pop Up - Departamento y Municipio'
-											/>
-										</div>
-
-										<div className='col-3'>
-											<button type='submit' className='btn btn-primary mr-3'>
-												Agregar Adquisición
-											</button>
-										</div>
-									</div>
+                                    <AdquisitionsFrom handleChange={handleChange}/>
 									{/* END Adquisitions */}
 
 									<div
@@ -765,12 +544,13 @@ const RealEstate = ({ name }: IProps) => {
 										<button type='submit' className='btn btn-success mr-3'>
 											Guardar
 										</button>
-										<div
+										<button
+                                            type="button"
 											className='btn btn-primary mx-3'
 											onClick={_createRealEstate}
 										>
 											Agregar
-										</div>
+										</button>
 									</div>
 								</form>
 							</div>
