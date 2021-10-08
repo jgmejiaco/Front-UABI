@@ -4,6 +4,7 @@ import {
 	getProject,
 	getRealEstate,
 	updateProject,
+	updateRealEstate,
 } from '../../../../../apis/uabi';
 import {
 	IRealEstateAttributes,
@@ -17,6 +18,8 @@ interface IProps {
 
 const DetailProject = () => {
 	const { id } = useParams<IProps>();
+	console.log(useParams());
+
 	const history = useHistory();
 	const [realEstate, setRealEstate] = useState<IRealEstateAttributes>({
 		id: -1,
@@ -47,25 +50,25 @@ const DetailProject = () => {
 	});
 
 	const _getRealEstate = async () => {
-		let projectResponse: IRealEstateResponse | string = await getRealEstate(id);
+		let realEstateResponse: IRealEstateResponse | string = await getRealEstate(
+			id
+		);
+		console.log(realEstateResponse);
 
-		if (typeof projectResponse !== 'string') {
-			let tmpData = projectResponse.data;
+		if (typeof realEstateResponse !== 'string') {
+			let tmpData = realEstateResponse.data;
 
 			setRealEstate(tmpData);
 		}
 	};
 
 	const _updateRealEstate = async () => {
-		if (typeof realEstate.id === 'string') {
-			let res: any = await updateProject(
-				{ name: realEstate.name, description: realEstate.description },
-				parseInt(realEstate.id)
-			);
+		if (typeof realEstate.id === 'number') {
+			let res: any = await updateRealEstate(realEstate, parseInt(id));
 
 			console.log(res);
 			await alert(res.data.message);
-			history.push(`/adquisitions/projects/${realEstate.id}`);
+			history.push(`/adquisitions/real-estates/${id}`);
 		}
 	};
 
@@ -109,18 +112,30 @@ const DetailProject = () => {
 												aria-label='dependency'
 												name='dependency'
 												value={realEstate.dependency}
-												disabled
+												onChange={handleChange}
 											>
-												<option value='' selected disabled hidden>
-													-- Seleccione Dependencia --
-												</option>
-												<option value='Secretaría Suministros'>
+												<option
+													value='Secretaría Suministros'
+													selected={
+														realEstate.dependency === 'Secretaría Suministros'
+													}
+												>
 													Secretaría Suministros
 												</option>
-												<option value='Secretaría Salud'>
+												<option
+													value='Secretaría Salud'
+													selected={
+														realEstate.dependency === 'Secretaría Salud'
+													}
+												>
 													Secretaría Salud
 												</option>
-												<option value='Secretaría Cultura'>
+												<option
+													value='Secretaría Cultura'
+													selected={
+														realEstate.dependency === 'Secretaría Cultura'
+													}
+												>
 													Secretaría Cultura
 												</option>
 												<option value='POR DEFINIR'>POR DEFINIR</option>
@@ -134,16 +149,33 @@ const DetailProject = () => {
 												className='form-select'
 												aria-label='destination_type'
 												name='destination_type'
+												onChange={handleChange}
 												value={realEstate.destination_type}
-												disabled
 											>
-												<option value='' selected disabled hidden>
-													-- Seleccione Destinación --
+												<option
+													value='Público'
+													selected={realEstate.dependency === 'Público'}
+												>
+													Público
 												</option>
-												<option value='Público'>Público</option>
-												<option value='Fiscal'>Fiscal</option>
-												<option value='Mixto'>Mixto</option>
-												<option value='POR DEFINIR'>POR DEFINIR</option>
+												<option
+													value='Fiscal'
+													selected={realEstate.dependency === 'Fiscal'}
+												>
+													Fiscal
+												</option>
+												<option
+													value='Mixto'
+													selected={realEstate.dependency === 'Mixto'}
+												>
+													Mixto
+												</option>
+												<option
+													value='POR DEFINIR'
+													selected={realEstate.dependency === 'POR DEFINIR'}
+												>
+													POR DEFINIR
+												</option>
 											</select>
 										</div>
 										<div className='col-3'>
@@ -153,17 +185,34 @@ const DetailProject = () => {
 											<select
 												className='form-select'
 												aria-label='accounting_account'
+												onChange={handleChange}
 												name='accounting_account'
 												value={realEstate.accounting_account}
-												disabled
 											>
-												<option value='' selected disabled hidden>
-													-- Seleccione Cuenta Contable --
+												<option
+													value='Público'
+													selected={realEstate.dependency === 'Público'}
+												>
+													Público
 												</option>
-												<option value='Público'>Público</option>
-												<option value='2'>Fiscal</option>
-												<option value='3'>Mixto</option>
-												<option value='POR DEFINIR'>POR DEFINIR</option>
+												<option
+													value='Fiscal'
+													selected={realEstate.dependency === 'Fiscal'}
+												>
+													Fiscal
+												</option>
+												<option
+													value='Mixto'
+													selected={realEstate.dependency === 'Mixto'}
+												>
+													Mixto
+												</option>
+												<option
+													value='POR DEFINIR'
+													selected={realEstate.dependency === 'POR DEFINIR'}
+												>
+													POR DEFINIR
+												</option>
 											</select>
 										</div>
 										<div className='col-3'>
@@ -173,17 +222,34 @@ const DetailProject = () => {
 											<select
 												className='form-select'
 												aria-label='cost_center'
+												onChange={handleChange}
 												name='cost_center'
 												value={realEstate.cost_center}
-												disabled
 											>
-												<option value='' selected disabled hidden>
-													-- Seleccione Centro de Costos --
+												<option
+													value='Público'
+													selected={realEstate.dependency === 'Público'}
+												>
+													Público
 												</option>
-												<option value='Público'>Público</option>
-												<option value='2'>Fiscal</option>
-												<option value='3'>Mixto</option>
-												<option value='POR DEFINIR'>POR DEFINIR</option>
+												<option
+													value='Fiscal'
+													selected={realEstate.dependency === 'Fiscal'}
+												>
+													Fiscal
+												</option>
+												<option
+													value='Mixto'
+													selected={realEstate.dependency === 'Mixto'}
+												>
+													Mixto
+												</option>
+												<option
+													value='POR DEFINIR'
+													selected={realEstate.dependency === 'POR DEFINIR'}
+												>
+													POR DEFINIR
+												</option>
 											</select>
 										</div>
 
@@ -197,13 +263,11 @@ const DetailProject = () => {
 											<input
 												type=''
 												className='form-control'
-												id='exampleInputEmail1'
-												aria-describedby='emailHelp'
+												id='registry_number'
 												name='registry_number'
+												onChange={handleChange}
 												value={realEstate.registry_number}
-												disabled
 											/>
-											<div id='emailHelp' className='form-text'></div>
 										</div>
 										<div className='col-3'>
 											<label
@@ -217,8 +281,8 @@ const DetailProject = () => {
 												className='form-control'
 												id='name'
 												name='name'
-												value={realEstate.dependency}
-												disabled
+												onChange={handleChange}
+												value={realEstate.name}
 											/>
 										</div>
 										<div className='col-6'>
@@ -234,8 +298,8 @@ const DetailProject = () => {
 												id='description'
 												aria-describedby='description'
 												name='description'
+												onChange={handleChange}
 												value={realEstate.description}
-												disabled
 											/>
 										</div>
 
@@ -251,8 +315,8 @@ const DetailProject = () => {
 												className='form-control'
 												id='address'
 												name='address'
+												onChange={handleChange}
 												value={realEstate.address}
-												disabled
 												placeholder='Integración con Localización (Pop Up)'
 											/>
 										</div>
@@ -262,9 +326,9 @@ const DetailProject = () => {
 												type='number'
 												className='form-control'
 												id='total_area'
+												onChange={handleChange}
 												name='total_area'
 												value={realEstate.total_area}
-												disabled
 											/>
 										</div>
 										<div className='col-2'>
@@ -273,9 +337,9 @@ const DetailProject = () => {
 												type='number'
 												className='form-control'
 												id='total_percentage'
+												onChange={handleChange}
 												name='total_percentage'
 												value={realEstate.total_percentage}
-												disabled
 											/>
 										</div>
 
@@ -299,7 +363,6 @@ const DetailProject = () => {
 													id='flexRadioDefault2'
 													name='estate_type'
 													value={realEstate.estate_type}
-													disabled
 													checked
 												/>
 												<label
@@ -317,7 +380,6 @@ const DetailProject = () => {
 													id='flexRadioDefault1'
 													name='estate_type'
 													value={realEstate.estate_type}
-													disabled
 												/>
 												<label
 													className='form-check-label'
@@ -334,7 +396,6 @@ const DetailProject = () => {
 												name='tipology'
 												id='tipology'
 												value={realEstate.tipology}
-												disabled
 											>
 												<option value='' selected disabled hidden>
 													-- Seleccione Tipología --
@@ -363,7 +424,6 @@ const DetailProject = () => {
 												className='form-select'
 												aria-label='Default select example'
 												name='acquisition_type'
-												disabled
 											>
 												<option value='1' selected>
 													Compraventa
@@ -422,7 +482,6 @@ const DetailProject = () => {
 												aria-describedby='act_number'
 												name='act_number'
 												value={realEstate.dependency}
-												disabled
 											/>
 										</div>
 										<div className='col-3'>
@@ -439,7 +498,6 @@ const DetailProject = () => {
 												aria-describedby='patrimonial_value'
 												name='patrimonial_value'
 												value={realEstate.dependency}
-												disabled
 											/>
 										</div>
 										<div className='col-2'>
@@ -575,119 +633,9 @@ const DetailProject = () => {
 											</div>
 										</div>
 									</div>
-									<div className='d-flex my-3'>
-										<button type='submit' className='btn btn-success mr-3'>
-											Guardar
-										</button>
-										<div
-											className='btn btn-primary mx-3'
-											// onClick={_createRealEstate}
-										>
-											Agregar
-										</div>
-									</div>
 								</form>
 							</div>
-							<table
-								className='table table-hover text-center table-bordered'
-								style={{ borderRadius: 15 }}
-							>
-								<thead>
-									<tr>
-										<th scope='col' className='align-top'>
-											Número Matricula
-										</th>
-										<th scope='col' className='align-top'>
-											Nombre Inmueble
-										</th>
-										<th scope='col' className='align-top'>
-											Valor Patrimonial
-										</th>
-										<th scope='col' className='align-top'>
-											% Adquirido
-										</th>
-										<th scope='col' className='align-top'>
-											Acciones
-											<div className='d-flex justify-content-center'>
-												<p>ver</p>
-												<p>editar</p>
-												<p>eliminar</p>
-											</div>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope='row'>1-2345678</th>
-										<td>Inmueble 1</td>
-										<td>10000000</td>
-										<td>10</td>
-										<td>
-											<div
-												className='btn-group'
-												role='group'
-												aria-label='Basic mixed styles example'
-											>
-												<a href=''>
-													<i className='fa fa-eye' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-pencil' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-trash' aria-hidden='true'></i>
-												</a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope='row'>1-2345679</th>
-										<td>Inmueble 2</td>
-										<td>10000000</td>
-										<td>100</td>
-										<td>
-											<div
-												className='btn-group'
-												role='group'
-												aria-label='Basic mixed styles example'
-											>
-												<a href=''>
-													<i className='fa fa-eye' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-pencil' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-trash' aria-hidden='true'></i>
-												</a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope='row'>1-2345670</th>
-										<td>Inmueble 3</td>
-										<td>10000000</td>
-										<td>50</td>
-										<td>
-											<div
-												className='btn-group'
-												role='group'
-												aria-label='Basic mixed styles example'
-											>
-												<a href=''>
-													<i className='fa fa-eye' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-pencil' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-trash' aria-hidden='true'></i>
-												</a>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+
 							<div className='col text-center'>
 								<div
 									className='btn btn-success my-3'

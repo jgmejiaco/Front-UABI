@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { TextArea } from 'semantic-ui-react';
 import { getRealEstate } from '../../../../../apis/uabi';
 import {
 	IRealEstateAttributes,
@@ -79,7 +80,15 @@ const DetailRealEstate = () => {
 								padding: '10px 20px',
 							}}
 						>
-							<h5>Bien Inmueble</h5>
+							<div className='d-flex justify-content-between align-items-center'>
+								<h5 className='m-0'>Bien Inmueble</h5>
+								<Link
+									to={`/adquisitions/real-estates/edit/${realEstate.id}`}
+									className='btn btn-success'
+								>
+									Editar
+								</Link>
+							</div>
 							<hr />
 							<div className='container'>
 								<form>
@@ -201,7 +210,7 @@ const DetailRealEstate = () => {
 												className='form-control'
 												id='name'
 												name='name'
-												value={realEstate.dependency}
+												value={realEstate.name}
 												disabled
 											/>
 										</div>
@@ -328,6 +337,107 @@ const DetailRealEstate = () => {
 												<option value='POR DEFINIR'>POR DEFINIR</option>
 											</select>
 										</div>
+										<div className='col-3'>
+											<label
+												htmlFor='exampleInputEmail1'
+												className='form-label'
+											>
+												Creado por
+											</label>
+											<input
+												type=''
+												className='form-control'
+												id='name'
+												name='name'
+												value={realEstate.audit_trail?.created_by}
+												disabled
+											/>
+										</div>
+										<div className='col-3'>
+											<label
+												htmlFor='exampleInputEmail1'
+												className='form-label'
+											>
+												Fecha creación
+											</label>
+											<input
+												type=''
+												className='form-control'
+												id='name'
+												name='name'
+												// value={realEstate.audit_trail?.created_on}
+												disabled
+											/>
+										</div>
+										<div className='col-3'>
+											<label
+												htmlFor='exampleInputEmail1'
+												className='form-label'
+											>
+												Sociedad
+											</label>
+											<input
+												type=''
+												className='form-control'
+												id='name'
+												name='name'
+												value={`FIMM`}
+												disabled
+											/>
+										</div>
+										<div className='col-3'>
+											<label
+												htmlFor='exampleInputEmail1'
+												className='form-label'
+											>
+												Importe Contabilidad
+											</label>
+											<input
+												type='number'
+												className='form-control'
+												id='name'
+												name='name'
+												// value={realEstate.audit_trail?.created_by}
+												disabled
+											/>
+										</div>
+										<div className='col-3'>
+											<label
+												htmlFor='exampleInputEmail1'
+												className='form-label'
+											>
+												Periodo contable
+											</label>
+											<input
+												type=''
+												className='form-control'
+												id='name'
+												name='name'
+												// value={realEstate.audit_trail?.created_by}
+												disabled
+												// EL MES
+											/>
+										</div>
+										<div className='col-3'>
+											<label
+												htmlFor='exampleInputEmail1'
+												className='form-label'
+											>
+												Contrapartida
+											</label>
+											<input
+												type='number'
+												className='form-control'
+												id='name'
+												name='name'
+												// value={realEstate.audit_trail?.created_by}
+												disabled
+											/>
+										</div>
+										<TextArea
+											className='col-12'
+											placeholder='Comentarios y anotaciones'
+										/>
 									</div>
 
 									{/* Adquisitions */}
@@ -559,123 +669,7 @@ const DetailRealEstate = () => {
 											</div>
 										</div>
 									</div>
-									<div className='d-flex my-3'>
-										<button type='submit' className='btn btn-success mr-3'>
-											Guardar
-										</button>
-										<div
-											className='btn btn-primary mx-3'
-											// onClick={_createRealEstate}
-										>
-											Agregar
-										</div>
-									</div>
 								</form>
-							</div>
-							<table
-								className='table table-hover text-center table-bordered'
-								style={{ borderRadius: 15 }}
-							>
-								<thead>
-									<tr>
-										<th scope='col' className='align-top'>
-											Número Matricula
-										</th>
-										<th scope='col' className='align-top'>
-											Nombre Inmueble
-										</th>
-										<th scope='col' className='align-top'>
-											Valor Patrimonial
-										</th>
-										<th scope='col' className='align-top'>
-											% Adquirido
-										</th>
-										<th scope='col' className='align-top'>
-											Acciones
-											<div className='d-flex justify-content-center'>
-												<p>ver</p>
-												<p>editar</p>
-												<p>eliminar</p>
-											</div>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope='row'>1-2345678</th>
-										<td>Inmueble 1</td>
-										<td>10000000</td>
-										<td>10</td>
-										<td>
-											<div
-												className='btn-group'
-												role='group'
-												aria-label='Basic mixed styles example'
-											>
-												<a href=''>
-													<i className='fa fa-eye' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-pencil' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-trash' aria-hidden='true'></i>
-												</a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope='row'>1-2345679</th>
-										<td>Inmueble 2</td>
-										<td>10000000</td>
-										<td>100</td>
-										<td>
-											<div
-												className='btn-group'
-												role='group'
-												aria-label='Basic mixed styles example'
-											>
-												<a href=''>
-													<i className='fa fa-eye' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-pencil' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-trash' aria-hidden='true'></i>
-												</a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope='row'>1-2345670</th>
-										<td>Inmueble 3</td>
-										<td>10000000</td>
-										<td>50</td>
-										<td>
-											<div
-												className='btn-group'
-												role='group'
-												aria-label='Basic mixed styles example'
-											>
-												<a href=''>
-													<i className='fa fa-eye' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-pencil' aria-hidden='true'></i>
-												</a>
-												<a href=''>
-													<i className='fa fa-trash' aria-hidden='true'></i>
-												</a>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							<div className='col text-center'>
-								<button type='submit' className='btn btn-success my-3'>
-									Guardar
-								</button>
 							</div>
 						</div>
 					</div>
