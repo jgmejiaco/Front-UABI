@@ -15,6 +15,7 @@ import DetailProject from './pages/Projects/components/DetailProject';
 import EditProject from './pages/Projects/components/EditProject';
 import RealEstate from './pages/RealEstate';
 import DetailRealEstate from './pages/RealEstate/components/DetailRealEstate';
+import EditRealEstate from './pages/RealEstate/components/EditRealEstate';
 
 function MasterTemplate() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -56,10 +57,10 @@ function MasterTemplate() {
 							<CreateRealEstate name='Crear' />
 						</PrivateRoute>
 						<PrivateRoute
-							path='/adquisitions/real-estates/edit'
+							path='/adquisitions/real-estates/edit/:id'
 							isAuthenticated={isAuthenticated}
 						>
-							<CreateRealEstate name='Editar' />
+							<EditRealEstate />
 						</PrivateRoute>
 
 						<Route path='/adquisitions/real-estates/edit/:id'>
