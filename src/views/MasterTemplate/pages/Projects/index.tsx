@@ -172,7 +172,7 @@ const Projects = ({ name }: IProps) => {
 									{typeof projectsArray !== 'undefined' &&
 										projectsArray.map((project) => {
 											let creationDate = new Date(
-												parseFloat(project.audit_trail.created_on) * 1000
+												parseFloat(project.audit_trail.created_on)
 											).toDateString();
 											return (
 												<ItemProject
