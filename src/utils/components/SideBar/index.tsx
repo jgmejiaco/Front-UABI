@@ -24,11 +24,11 @@ const SideBar = () => {
 						{ to: '/real-estates', name: 'Bienes Inmuebles' },
 					]}
 				/>
-				<SBItem
+				{/* <SBItem
 					id='registroContable'
 					name='Registro Contable - UABI'
 					sublinks={[{ to: '/', name: 'Registro Contable - UABI' }]}
-				/>
+				/> */}
 				<SBItem id='asegurabilidad' name='Asegurabilidad' />
 				<SBItem
 					id='disposition'
