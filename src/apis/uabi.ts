@@ -100,6 +100,23 @@ export const getRealEstates = async (): Promise<
 	}
 };
 
+export const getRealEstatesByProject = async (
+	project_id: string
+): Promise<IRealEstatesResponse | string> => {
+	try {
+		let URI = `${URI_SERVICE_UABI}real-estates/project`;
+		let res: AxiosResponse<IRealEstatesResponse> = await axios.get(URI, {
+			params: { project_id },
+		});
+		console.log(res);
+
+		return res.data;
+	} catch (error) {
+		console.error(error);
+		return 'Error';
+	}
+};
+
 export const getRealEstate = async (
 	id: string
 ): Promise<IRealEstateResponse | string> => {
@@ -110,6 +127,22 @@ export const getRealEstate = async (
 		});
 
 		return res.data;
+	} catch (error) {
+		console.error(error);
+		return 'Error';
+	}
+};
+
+export const updateRealEstate = async (data: any, id: number) => {
+	try {
+		let URI = `${URI_SERVICE_UABI}real-estates`;
+		delete data['id'];
+		delete data['audit_trail'];
+		let res: AxiosResponse<IProjectResponse> = await axios.put(URI, data, {
+			params: { id: id },
+		});
+
+		return res;
 	} catch (error) {
 		console.error(error);
 		return 'Error';
