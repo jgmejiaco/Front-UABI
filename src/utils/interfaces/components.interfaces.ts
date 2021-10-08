@@ -81,7 +81,7 @@ export interface IItemRealEstate {
 	id: string;
 	matricula: string | number;
 	name: string;
-	dependency?: string;
+	project?: number | string;
 	creationDate: string;
 	createdBy?: string;
 }

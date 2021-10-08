@@ -6,7 +6,7 @@ const ItemRealEstate = ({
 	id,
 	matricula,
 	name,
-	dependency,
+	project,
 	creationDate,
 	createdBy,
 }: IItemRealEstate) => {
@@ -26,7 +26,8 @@ const ItemRealEstate = ({
 		<tr>
 			<th scope='row'>{id}</th>
 			<td>{matricula}</td>
-			<td>{dependency}</td>
+			<td>{name}</td>
+			{project && <td>{project}</td>}
 
 			<td>{creationDate}</td>
 			<td>{createdBy}</td>
