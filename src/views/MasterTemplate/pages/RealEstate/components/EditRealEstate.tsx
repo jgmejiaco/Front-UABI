@@ -409,7 +409,7 @@ const DetailProjects = () => {
 									</div>
 
 									{/* Adquisitions */}
-                                    <AdquisitionsFrom handleChange={handleChange} values={realEstate}/>
+                                    <AdquisitionsFrom type="edit"/>
 									{/* END Adquisitions */}
 
 									<div

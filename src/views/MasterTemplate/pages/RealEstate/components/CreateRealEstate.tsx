@@ -499,7 +499,7 @@ const RealEstate = ({ name }: IProps) => {
 									</div>
 
 									{/* Adquisitions */}
-                                    <AdquisitionsFrom handleChange={handleChange}/>
+                                    <AdquisitionsFrom type="create"/>
 									{/* END Adquisitions */}
 
 									<div

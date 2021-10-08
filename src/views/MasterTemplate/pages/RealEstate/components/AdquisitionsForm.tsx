@@ -326,6 +326,16 @@ const AdquisitionsFrom: FC<any> = ({ type }) => {
                             <Table.HeaderCell>Tipo de Adquisición</Table.HeaderCell>
                             <Table.HeaderCell>No Acto administrativo</Table.HeaderCell>
                             <Table.HeaderCell>Valor de adquisición</Table.HeaderCell>
+                            {type === "view" && <Fragment>
+                                <Table.HeaderCell>Tipo de Título</Table.HeaderCell>
+                                <Table.HeaderCell>Tipo de activo</Table.HeaderCell>
+                                <Table.HeaderCell>Vendedor</Table.HeaderCell>
+                                <Table.HeaderCell>Porcentaje Adquirido</Table.HeaderCell>
+                                <Table.HeaderCell>Area Total</Table.HeaderCell>
+                                <Table.HeaderCell>Tipo de Entidad</Table.HeaderCell>
+                                <Table.HeaderCell>No. Entidad</Table.HeaderCell>
+                                <Table.HeaderCell>Dirección</Table.HeaderCell>
+                            </Fragment>}
                         </Table.Row>
                     </Table.Header>
 
@@ -339,14 +349,20 @@ const AdquisitionsFrom: FC<any> = ({ type }) => {
                                     <Table.Cell>{row.title_type}</Table.Cell>
                                     <Table.Cell>{row.active_type}</Table.Cell>
                                     <Table.Cell>{row.seller}</Table.Cell>
-                                    <Table.Cell>{row.entity_type}</Table.Cell>
                                     <Table.Cell>{row.acquired_percentage}</Table.Cell>
-                                    <Table.Cell>{row.address}</Table.Cell>
                                     <Table.Cell>{row.area}</Table.Cell>
+                                    <Table.Cell>{row.entity_type}</Table.Cell>
                                     <Table.Cell>{row.entity_number}</Table.Cell>
+                                    <Table.Cell>{row.address}</Table.Cell>
                                 </Fragment>}
                             </Table.Row>
                         })}
+                        {adquisitions.length === 0 && type !== "view" && <Table.Row>
+                            <Table.Cell colSpan='3'>No se encontraron adquisiciónes</Table.Cell>
+                        </Table.Row>}
+                        {adquisitions.length === 0 && type === "view" && <Table.Row>
+                            <Table.Cell colSpan='11'>No se encontraron adquisiciónes</Table.Cell>
+                        </Table.Row>}
                     </Table.Body>
                 </Table>
             </div>
