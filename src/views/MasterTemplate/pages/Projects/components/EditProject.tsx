@@ -107,7 +107,6 @@ const DetailProject = () => {
 												value={project.name}
 												onChange={handleChange}
 											/>
-											<div id='emailHelp' className='form-text'></div>
 										</div>
 
 										<div className='md-form col-6'>
