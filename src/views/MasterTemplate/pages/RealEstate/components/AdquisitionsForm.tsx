@@ -1,10 +1,11 @@
 import React, { FC, Fragment, useState } from "react";
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react';
+import CheckboxGroup from 'react-checkbox-group'
 
 interface AdquisitionsItf {
     id?: number;
     acquisition_type?: string;
-    active_type?: string;
+    active_type?: any[];
     title_type?: string;
     act_number?: string;
     acquisition_value?: number;
@@ -25,7 +26,7 @@ const AdquisitionsFrom: FC<any> = ({ type }) => {
     const inicial_values: AdquisitionsItf = {
         title_type: "None",
         acquisition_type: "1",
-        active_type: "1",
+        active_type: ["1"],
         seller: "1",
         entity_type: "1",
         acquired_percentage: 0,
@@ -41,7 +42,7 @@ const AdquisitionsFrom: FC<any> = ({ type }) => {
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
-        // console.log("handleChange", { name, value });
+        console.log("handleChange", { name, value });
         const data = {
             ...adquisition,
             [name]: value,
@@ -100,20 +101,39 @@ const AdquisitionsFrom: FC<any> = ({ type }) => {
                     <label htmlFor='form-select' className='form-label'>
                         Tipo de activo
                     </label>
-                    <select
+
+                    {/* <select
                         className='form-select'
                         aria-label='Default select example'
                         name="active_type"
                         onChange={handleChange}
                         value={adquisition.active_type}
                     >
-                        <option value='1'>
-                            Lote
-                        </option>
+                        <option value='1'>Lote</option>
                         <option value='2'>Construccion</option>
                         <option value='3'>Mejora</option>
                         <option value='4'>Construcción para demoler</option>
-                    </select>
+                    </select> */}
+                    <CheckboxGroup name="active_type" value={adquisition.active_type || []} onChange={(data) => {
+                        set_adquisition({ ...adquisition, active_type: data.length > 0 ? data : ["1"] })
+                    }}>
+                        {(Checkbox) => (
+                            <>
+                                <label>
+                                    <Checkbox value="1" /> Lote
+                                </label>
+                                <label>
+                                    <Checkbox value="2" /> Construccion
+                                </label>
+                                <label>
+                                    <Checkbox value="3" /> Construccion Mejora
+                                </label>
+                                <label>
+                                    <Checkbox value="4" /> Construcción para demoler
+                                </label>
+                            </>
+                        )}
+                    </CheckboxGroup>
                 </div>
                 <div className='col-6'>
                     <label htmlFor='form-select' className='form-label'>
@@ -184,22 +204,72 @@ const AdquisitionsFrom: FC<any> = ({ type }) => {
                     />
                 </div>
                 <div className='col-6'>
-                    <label
-                        htmlFor='exampleInputEmail1'
-                        className='form-label'
-                    >
-                        Area Total (m2)
-                    </label>
-                    <input
-                        type='number'
-                        className='form-control'
-                        id='area'
-                        aria-describedby='area'
-                        name="area"
-                        onChange={handleChange}
-                        value={adquisition.area || ""}
-                    />
+                    {adquisition.active_type?.includes("1") && <>
+                        <label
+                            htmlFor='exampleInputEmail1'
+                            className='form-label'
+                        >
+                            Area Total Lote (m2)
+                        </label>
+                        <input
+                            type='number'
+                            className='form-control'
+                            id='area'
+                            aria-describedby='area'
+                            name="area"
+                            onChange={handleChange}
+                            value={adquisition.area || ""}
+                        />
+                    </>}
                 </div>
+                <div className='col-6'>
+                    {(adquisition.active_type?.includes("2") || adquisition.active_type?.includes("3") || adquisition.active_type?.includes("4")) && <>
+                        <label
+                            htmlFor='exampleInputEmail1'
+                            className='form-label'
+                        >
+                            Area Construccion (m2)
+                        </label>
+                        <input
+                            type='number'
+                            className='form-control'
+                            id='area_construccion'
+                            aria-describedby='area'
+                            name="area"
+                            onChange={handleChange}
+                            value={adquisition.area || ""}
+                        />
+                    </>}
+
+                </div>
+                {/* {type === "edit" && <div className='col-12'>
+                    <div className='mb-3'>
+                        <label htmlFor='formFile' className='form-label'>
+                           Previacion
+                        </label>
+                        <input
+                            className='form-control'
+                            type='file'
+                            id='formFile'
+                        />
+                        <div id='emailHelp' className='form-text'>
+                           Escritura.pdf
+                        </div>
+                    </div>
+                    <div className='mb-3'>
+                        <label htmlFor='formFile' className='form-label'>
+                           Avaluo
+                        </label>
+                        <input
+                            className='form-control'
+                            type='file'
+                            id='formFile'
+                        />
+                        <div id='emailHelp' className='form-text'>
+                           Escritura.pdf
+                        </div>
+                    </div>                
+                </div> } */}
                 <div className='col-6'>
                     <label
                         htmlFor='exampleInputEmail1'
@@ -238,20 +308,20 @@ const AdquisitionsFrom: FC<any> = ({ type }) => {
                     </select>
                 </div>
                 {/* <div className='col-3'>
-            <label htmlFor='form-select' className='form-label'>
-                Comprador
-            </label>
-            <select
-                className='form-select'
-                aria-label='Default select example'
-            >
-                <option value='1' selected>
-                    Alexander
-                </option>
-                <option value='2'>Sergio</option>
-                <option value='3'>Ximena</option>
-            </select>
-        </div> */}
+                    <label htmlFor='form-select' className='form-label'>
+                        Comprador
+                    </label>
+                    <select
+                        className='form-select'
+                        aria-label='Default select example'
+                    >
+                        <option value='1' selected>
+                            Alexander
+                        </option>
+                        <option value='2'>Sergio</option>
+                        <option value='3'>Ximena</option>
+                    </select>
+                </div> */}
 
                 <div className='col-6'>
                     <label htmlFor='form-select' className='form-label'>
@@ -277,7 +347,7 @@ const AdquisitionsFrom: FC<any> = ({ type }) => {
                         htmlFor='exampleInputEmail1'
                         className='form-label'
                     >
-                        No. Entidad
+                        No.Entidad
                     </label>
                     <input
                         type='number'
@@ -309,8 +379,10 @@ const AdquisitionsFrom: FC<any> = ({ type }) => {
                 <div className='col-9' />
                 <div className='col-3'>
                     <button type='button' className='btn btn-primary mr-3' onClick={() => {
-                        addAdquisition(adquisition);
-                        clearAdquisition();
+                        console.log("add adquisition", adquisition);
+
+                        // addAdquisition(adquisition);
+                        // clearAdquisition();
                     }}>
                         Agregar Adquisición
                     </button>
@@ -347,7 +419,7 @@ const AdquisitionsFrom: FC<any> = ({ type }) => {
                                 <Table.Cell>{row.acquisition_value}</Table.Cell>
                                 {type === "view" && <Fragment>
                                     <Table.Cell>{row.title_type}</Table.Cell>
-                                    <Table.Cell>{row.active_type}</Table.Cell>
+                                    <Table.Cell>{row.active_type?.join(', ')}</Table.Cell>
                                     <Table.Cell>{row.seller}</Table.Cell>
                                     <Table.Cell>{row.acquired_percentage}</Table.Cell>
                                     <Table.Cell>{row.area}</Table.Cell>
