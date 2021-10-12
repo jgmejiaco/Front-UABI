@@ -40,9 +40,11 @@ const Sider: FC<{width: number}> = ({width}) => {
                     <Menu.Item key="2" onClick={goTo("/acquisitions/projects/")}>Proyectos</Menu.Item>
                     <Menu.Item key="3" onClick={goTo("/acquisitions/real-estates/")}>Bienes Inmuebles</Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub3" title="Asegurabilidad"/>
+                <SubMenu key="sub3" title="Asegurabilidad">
+                    <Menu.Item key="4" onClick={goTo("/asegurabilidad/")}>Asegurabilidad</Menu.Item>
+                </SubMenu>
                 <SubMenu key="sub4" title="Disposición">
-                    <Menu.Item key="4" onClick={goTo("/acquisitions/real-estates/areas/")}>Áreas</Menu.Item>
+                    <Menu.Item key="5" onClick={goTo("/acquisitions/real-estates/areas/")}>Áreas</Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub5" title="Supervisión"/>
                 <SubMenu key="sub6" title="Facturación"/>
