@@ -1,5 +1,5 @@
-import { createElement } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { createElement } from "react";
+import { Route, Redirect } from "react-router-dom";
 // import { useRecoilValue } from 'recoil';
 
 // import { authAtom } from '_state';
@@ -7,15 +7,15 @@ import { Route, Redirect } from 'react-router-dom';
 export { PrivateRoute };
 
 const PrivateRoute = ({ component, isAuthenticated, ...rest }: any) => {
-	console.log(isAuthenticated);
+    console.log(isAuthenticated);
 
-	const routeComponent = (props: any) =>
-		isAuthenticated ? (
-			createElement(component, props)
-		) : (
-			<Redirect to={{ pathname: '/auth', state: { from: props.location } }} />
-		);
-	return <Route {...rest} render={routeComponent} />;
+    const routeComponent = (props: any) =>
+        isAuthenticated ? (
+            createElement(component, props)
+        ) : (
+            <Redirect to={{ pathname: "/auth", state: { from: props.location } }} />
+        );
+    return <Route {...rest} render={routeComponent} />;
 };
 
 // function PrivateRoute({ component, ...rest }: props) {
