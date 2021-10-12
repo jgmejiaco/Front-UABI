@@ -1,12 +1,17 @@
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "./main";
+
+// Libs
+@import "~semantic-ui-css/semantic.min.css";
+@import "~antd/dist/antd.min.css";
+@import "~bootstrap/scss/bootstrap";
 
 //Bases
-@import './base/settings';
-@import './base/base';
-@import './base/button';
+@import "./base/settings";
+@import "./base/base";
+@import "./base/button";
+@import "./base/template";
 
 // Components
 
 // Screen
-@import './views/auth.scss';
+@import "./views/auth.scss";
