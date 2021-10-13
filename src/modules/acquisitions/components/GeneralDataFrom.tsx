@@ -1,13 +1,19 @@
 import { FC } from "react";
 
-const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
+const GeneralDataForm: FC<any> = ({ handleChange, type, data }) => {
     return (
         <div className="row my-5 py-3">
             <div className="col-3">
                 <label htmlFor="form-select" className="form-label">
                     Dependencia a cargo
                 </label>
-                <select className="form-select" aria-label="dependency" name="dependency" onChange={handleChange}>
+                <select
+                    className="form-select"
+                    aria-label="dependency"
+                    name="dependency"
+                    onChange={handleChange}
+                    value={data.dependency}
+                >
                     <option value="" selected disabled hidden>
                         -- Seleccione Dependencia --
                     </option>
@@ -26,6 +32,7 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
                     aria-label="destination_type"
                     name="destination_type"
                     onChange={handleChange}
+                    value={data.destination_type}
                 >
                     <option value="" selected disabled hidden>
                         -- Seleccione Destinación --
@@ -44,6 +51,7 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
                     aria-label="accounting_account"
                     name="accounting_account"
                     onChange={handleChange}
+                    value={data.accounting_account}
                 >
                     <option value="" selected disabled hidden>
                         -- Seleccione Cuenta Contable --
@@ -58,7 +66,13 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
                 <label htmlFor="form-select" className="form-label">
                     Centro de Costos
                 </label>
-                <select className="form-select" aria-label="cost_center" name="cost_center" onChange={handleChange}>
+                <select
+                    className="form-select"
+                    aria-label="cost_center"
+                    name="cost_center"
+                    onChange={handleChange}
+                    value={data.cost_center}
+                >
                     <option value="" selected disabled hidden>
                         -- Seleccione Centro de Costos --
                     </option>
@@ -80,6 +94,7 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
                     aria-describedby="emailHelp"
                     name="registry_number"
                     onChange={handleChange}
+                    value={data.registry_number}
                 />
                 <div id="emailHelp" className="form-text"></div>
             </div>
@@ -91,7 +106,7 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
                         </label>
                         <input className="form-control" type="file" id="formFile" />
                         <div id="emailHelp" className="form-text">
-                            Escritura.pdf
+                            Matricula.pdf
                         </div>
                     </div>
                 )}
@@ -101,7 +116,14 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
                 <label htmlFor="exampleInputEmail1" className="form-label">
                     Nombre Inmueble
                 </label>
-                <input type="" className="form-control" id="name" name="name" onChange={handleChange} />
+                <input
+                    type=""
+                    className="form-control"
+                    id="name"
+                    name="name"
+                    onChange={handleChange}
+                    value={data.name}
+                />
             </div>
             <div className="col-6">
                 <label htmlFor="exampleInputEmail1" className="form-label">
@@ -114,6 +136,7 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
                     aria-describedby="description"
                     name="description"
                     onChange={handleChange}
+                    value={data.description}
                 />
                 <div id="emailHelp" className="form-text"></div>
             </div>
@@ -128,6 +151,7 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
                     aria-describedby="patrimonial_value"
                     name="patrimonial_value"
                     onChange={handleChange}
+                    value={data.patrimonial_value}
                 />
             </div>
 
@@ -151,6 +175,7 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
                     className="form-control"
                     id="total_area"
                     name="total_area"
+                    value={data.total_area}
                     onChange={handleChange}
                 />
             </div>
@@ -161,22 +186,11 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
                     className="form-control"
                     id="total_percentage"
                     name="total_percentage"
+                    value={data.total_percentage}
                     onChange={handleChange}
                 />
             </div>
 
-            {/* <div className='col-3'>
-        <label
-            className='form-label'
-        >
-            Avalúo
-        </label>
-        <input
-            type=''
-            className='form-control'
-            id='exampleInputEmail1'
-        />
-    </div> */}
             <div className="col-2">
                 <div className="form-check">
                     <input
@@ -207,7 +221,13 @@ const GeneralDataForm: FC<any> = ({ handleChange, type }) => {
             </div>
             <div className="col-3">
                 <label className="form-label">Tipología</label>
-                <select className="form-select" name="tipology" id="tipology" onChange={handleChange}>
+                <select
+                    className="form-select"
+                    name="tipology"
+                    id="tipology"
+                    onChange={handleChange}
+                    value={data.tipology}
+                >
                     <option value="" selected disabled hidden>
                         -- Seleccione Tipología --
                     </option>

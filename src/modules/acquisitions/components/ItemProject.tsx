@@ -1,6 +1,7 @@
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { CSSProperties } from "react";
 import { IItemProject } from "../../../utils/interfaces/components.interfaces";
+import { altStatusProject } from "../../../apis/uabi";
 
 const ItemProject = ({ id, name, dependency, creationDate, createdBy }: IItemProject) => {
     let { path, url } = useRouteMatch();
@@ -40,9 +41,14 @@ const ItemProject = ({ id, name, dependency, creationDate, createdBy }: IItemPro
                     <Link to={`/acquisitions/projects/edit/${id}`} style={LinkStyle}>
                         <i className="fa fa-pencil" aria-hidden="true"></i>
                     </Link>
-                    <Link to={`/acquisitions/projects/delete?id=${id}`} style={LinkStyle}>
+                    <div
+                        style={LinkStyle}
+                        onClick={async () => {
+                            await altStatusProject(parseInt(id));
+                        }}
+                    >
                         <i className="fa fa-trash" aria-hidden="true"></i>
-                    </Link>
+                    </div>
                 </div>
             </td>
         </tr>

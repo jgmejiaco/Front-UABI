@@ -73,7 +73,7 @@ const get_routes = (): IRoute[] => {
             exact: true,
             is_private: true,
             can_access: true,
-            path: "/acquisitions/projects/",
+            path: "/acquisitions/projects",
             component: Projects,
         },
     ];

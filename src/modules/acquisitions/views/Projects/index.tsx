@@ -9,7 +9,7 @@ interface IProps {
     name: string;
 }
 
-const Projects = ({ name }: IProps) => {
+const Projects = () => {
     const [projectsArray, setProjectsArray] = useState<IProjectAttributes[]>([
         {
             id: "",
