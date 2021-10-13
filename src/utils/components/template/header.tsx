@@ -1,11 +1,11 @@
 import React, { FC, useContext } from "react";
-import Menu from "antd/lib/menu";
+// import Menu from "antd/lib/menu";
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
+    // UploadOutlined,
+    // UserOutlined,
+    // VideoCameraOutlined,
 } from "@ant-design/icons";
 import { TemplateConstext } from "./template_context";
 
@@ -24,7 +24,8 @@ const Header: FC<{ collapsible: boolean }> = ({ collapsible }) => {
                 <span>
                     Hola, <b>Andrea Canasteros Marulanda</b>
                 </span>
-                <span className="d-inline-block mx-2"
+                <span
+                    className="d-inline-block mx-2"
                     onClick={() => {
                         // history.replace("/auth/signin");
                         // window.location.reload();

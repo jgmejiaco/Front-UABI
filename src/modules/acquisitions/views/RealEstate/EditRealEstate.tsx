@@ -97,7 +97,7 @@ const DetailProjects = () => {
                             <hr />
                             <div className="container">
                                 <form>
-                                    <GeneralDataForm type="edit" handleChange={handleChange} />
+                                    <GeneralDataForm type="edit" handleChange={handleChange} data={realEstate} />
 
                                     {/* Adquisitions */}
                                     <AdquisitionsFrom type="edit" />

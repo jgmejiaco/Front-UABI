@@ -7,7 +7,7 @@ import store from "./config/store";
 
 import "./utils/assets/styles/index.scss";
 
-import Template from "./utils/components/template";
+// import Template from "./utils/components/template";
 import TemplateProvider from "./utils/components/template/template_context";
 
 declare global {

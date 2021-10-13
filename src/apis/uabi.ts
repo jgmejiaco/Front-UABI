@@ -6,7 +6,7 @@ import {
     IRealEstatesResponse,
 } from "../utils/interfaces/components.interfaces";
 
-const URI_SERVICE_UABI = "http://127.0.0.1:3001/";
+const URI_SERVICE_UABI = "http://127.0.0.1:3434/v1/";
 
 export const getProjects = async (): Promise<IProjectsResponse | string> => {
     try {
@@ -106,7 +106,7 @@ export const getRealEstatesByProject = async (
     try {
         let URI = `${URI_SERVICE_UABI}real-estates/project`;
         let res: AxiosResponse<IRealEstatesResponse> = await axios.get(URI, {
-            params: { project_id },
+            params: { id: project_id },
         });
         console.log(res);
 
@@ -140,6 +140,20 @@ export const updateRealEstate = async (data: any, id: number) => {
         delete data["audit_trail"];
         let res: AxiosResponse<IProjectResponse> = await axios.put(URI, data, {
             params: { id: id },
+        });
+
+        return res;
+    } catch (error) {
+        console.error(error);
+        return "Error";
+    }
+};
+
+export const altStatusProject = async (id: number) => {
+    try {
+        let URI = `${URI_SERVICE_UABI}projects/alt-status`;
+        let res: AxiosResponse<IProjectResponse> = await axios.put(URI, null, {
+            params: { id },
         });
 
         return res;
